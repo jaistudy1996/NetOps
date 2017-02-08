@@ -5,37 +5,42 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <style type="text/css">
-  	#from_loc {
-  		display: inline-block;
+  	/*#from_loc {
+  		 display: inline-block; 
   	}
-  </style>
+*/  </style>
   <body>
     <h1>Add Cables</h1>
     <p>Add cables to database.</p>
 
-    <div id="from_loc">
-    	<p>Select a from location: </p>
-    	<select>
-    		<option disabled>Select location</option>
-    		<option>Option 1</option>
-    	</select>
+    <div>
+        <form method="post" action="/add/addCable">
+            <fieldset>
+                <pre><label>Select a <strong>from</strong> location: <select name="from_loc" id="from_loc">
+                  		    <option disabled selected>Select location</option>
+                        </select></label>               <label>Select a <strong>to</strong> location:<select name="to_loc" id="to_loc">
+                    		<option disabled selected>Select location</option>
+                    	</select></label></pre>
+            </fieldset>
 
+            
+            <fieldset>
+                <label>Select cable type: 
+            	   <select id="cable_type" name="cable_type">
+            		  <option disabled selected>Select cable type</option>
+            	   </select>
+                </label>
+            </fieldset>
 
-    	<p>Select a to location: </p>
-    	<select>
-    		<option disabled>Select location</option>
-    		<option>Option 1</option>
-    	</select>
-
-    	<p>Select cable type: </p>
-    	<select>
-    		<option disabled>Select location</option>
-    		<option>Option 1</option>
-    	</select>
-
-    	<p>What are the number of tubes in this cable? </p>
-    	<input type="number" name="no_of_tubes">
+            <fieldset>
+                <label>What are the number of tubes in this cable?
+            	   <input type="number" name="no_of_tubes" id="number_tubes">
+                </label>
+            <br><br>
+            <button type="submit" id="cable_button">Save cable data</button>
+            </fieldset>
+        </form>
     </div>
-
+    <script type="text/javascript" src='javascripts/getLocations.js'></script>
   </body>
 </html>
