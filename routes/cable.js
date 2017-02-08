@@ -33,6 +33,7 @@ router.get('/getCableType', function(req, res, next){
 });
 
 router.post('/addCable', function(req, res, next){
+	// TODO: save this data in the database.
 	console.log(req.body);
 });
 

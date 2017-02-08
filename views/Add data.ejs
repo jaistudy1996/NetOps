@@ -14,27 +14,27 @@
     <p>Add cables to database.</p>
 
     <div>
-        <form method="post" action="/add/addCable">
+        <form method="post" action="/cable/addCable">
             <fieldset>
-                <pre><label>Select a <strong>from</strong> location: <select name="from_loc" id="from_loc">
-                  		    <option disabled selected>Select location</option>
-                        </select></label>               <label>Select a <strong>to</strong> location:<select name="to_loc" id="to_loc">
-                    		<option disabled selected>Select location</option>
+                <pre><label>Select a <strong>from</strong> location: <select name="from_loc" id="from_loc" required>
+                  		    <option value="" selected disabled>Select location</option>
+                        </select></label>               <label>Select a <strong>to</strong> location:<select name="to_loc" id="to_loc" required>
+                    		<option value="" disabled selected>Select location</option>
                     	</select></label></pre>
             </fieldset>
 
             
             <fieldset>
                 <label>Select cable type: 
-            	   <select id="cable_type" name="cable_type">
-            		  <option disabled selected>Select cable type</option>
+            	   <select id="cable_type" name="cable_type" required>
+            		  <option value="" disabled selected>Select cable type</option>
             	   </select>
                 </label>
             </fieldset>
 
             <fieldset>
                 <label>What are the number of tubes in this cable?
-            	   <input type="number" name="no_of_tubes" id="number_tubes">
+            	   <input type="number" name="no_of_tubes" id="number_tubes" min=0 required>
                 </label>
             <br><br>
             <button type="submit" id="cable_button">Save cable data</button>

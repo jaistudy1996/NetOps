@@ -3,7 +3,7 @@
 
 window.onload = function getLoc(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', '/add/getLocations', true);
+	xhr.open('GET', '/cable/getLocations', true);
 	xhr.responseType = 'json';
 	xhr.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
@@ -31,7 +31,7 @@ function updateLocOnPage(locations){
 function getCableType(){
 	console.log("cable_type");
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', '/add/getCableType', true)
+	xhr.open('GET', '/cable/getCableType', true)
 	xhr.responseType = 'json';
 	xhr.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
