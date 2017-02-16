@@ -37,7 +37,19 @@ router.get('/getStrandData/:cableID', function(req, res, next){
 
 router.post('/addTube', function(req, res, next){
 	// TODO: save this data in the database.
-	console.log(req.body);
+	var cableID = req.body.cable_name_id;
+	db.query("SELECT * from Cables_fiber where cable_id = ?", [cableID], function(err, results){
+		if(err){
+			console.log(err);
+			return;
+		}
+		if(results[0].num_of_tubes == req.body.tube.length){
+			console.log(results);
+		}
+		else{
+			res.send("Wrong number of tubes received.");
+		}
+	});
 	res.send(req.body);
 });
 
