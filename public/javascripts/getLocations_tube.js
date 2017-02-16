@@ -1,7 +1,7 @@
 // Author: Jayant Arora
 // Function to retrieve all cables from database.
 
-var cables;
+var cables; // Global variable to store all the cables retrieved from the database.
 
 window.onload = function getLoc(){
 	var xhr = new XMLHttpRequest();
@@ -26,6 +26,7 @@ function updateCablesOnPage(cables){
 		return
 }
 
+// Find the right cable depending on cableID selected by user. addInputForStrands function will be invoked upon selection.
 function updateTubeDataOnPage(cableID){
 	for(var i=0; i<cables.length; i++){
 		if(cables[i].cable_id == cableID){
@@ -36,8 +37,12 @@ function updateTubeDataOnPage(cableID){
 	}
 }
 
+// Add input boxes for corresponding to num_of_strands parameter from cables.
 function addInputForStrands(numOfTubes){
 	for(var i=1; i<=numOfTubes; i++){
-		document.getElementById("total_tubes").innerHTML += "<br><label>Tube "+ i +" has: <input type='number' min='0' required> strands. </label>";
+		document.getElementById("total_tubes").innerHTML += "<br><label name='tube'>Tube "+ i +" has: <input type='number' min='0' required> strands. </label>";
 	}
 }
+
+//TODO: Get present number of strands for the current tube. 
+	
