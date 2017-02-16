@@ -56,6 +56,7 @@ function updateCableTypeOnPage(name){
 
 var counterForTypes = 1; // Used to prevent from duplicate copies of select boxes
 function updateFiberTypeNumbers(){
+	// TODO: add functionality to remove select boxes if a different number is selected.
 	var types = document.getElementById("diff_type_of_fiber").value;
 	for(var i = counterForTypes; i<= types; i++){
 			document.getElementById("types_of_cable").innerHTML += "<label>Select cable "+i+ " type: <select name=cable_type_" + i + " required> <option value='' disabled selected>Select cable type</option> </select> </label>";
