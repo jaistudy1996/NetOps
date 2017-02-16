@@ -24,9 +24,21 @@ router.get('/getCables', function(req, res, next){
 	});
 });
 
+router.get('/getStrandData/:cableID', function(req, res, next){
+	var cableID = req.params.cableID;
+	db.query("SELECT * FROM Tubes_fiber where cable_id = ?", [cableID], function(err, results){
+		if(err){
+			console.log(err);
+			return;
+		}
+		res.send(results);
+	});
+});
+
 router.post('/addTube', function(req, res, next){
 	// TODO: save this data in the database.
 	console.log(req.body);
+	res.send(req.body);
 });
 
 module.exports = router;

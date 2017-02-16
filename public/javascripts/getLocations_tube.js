@@ -1,5 +1,5 @@
 // Author: Jayant Arora
-// Function to retrieve all cables from database.
+// Functions to retrieve all cables from database.
 
 var cables; // Global variable to store all the cables retrieved from the database.
 
@@ -40,9 +40,9 @@ function updateTubeDataOnPage(cableID){
 // Add input boxes for corresponding to num_of_strands parameter from cables.
 function addInputForStrands(numOfTubes){
 	for(var i=1; i<=numOfTubes; i++){
-		document.getElementById("total_tubes").innerHTML += "<br><label name='tube'>Tube "+ i +" has: <input type='number' min='0' required> strands. </label>";
+		document.getElementById("total_tubes").innerHTML += "<br><label>Tube "+ i +" has: <input name='tube' type='number' min='0' required> strands. </label>";
 	}
 }
 
 //TODO: Get present number of strands for the current tube. 
-	
+
