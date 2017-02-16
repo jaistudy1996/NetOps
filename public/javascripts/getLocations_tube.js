@@ -3,7 +3,7 @@
 
 window.onload = function getLoc(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', '/cable/getLocations', true);
+	xhr.open('GET', '/tube/getCables', true);
 	xhr.responseType = 'json';
 	xhr.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
@@ -18,7 +18,7 @@ window.onload = function getLoc(){
 }
 
 function updateLocOnPage(locations){
-		console.log(typeof(locations));
+		console.log(locations);
 		for (var i = 0; i<locations.length; i++){
 			document.getElementById("from_loc").innerHTML += "<option value="+locations[i].location_id+">"+
 			locations[i].building+"  -->  "+locations[i].closet+"</option>";
