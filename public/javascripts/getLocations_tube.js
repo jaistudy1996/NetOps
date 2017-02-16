@@ -7,8 +7,8 @@ window.onload = function getLoc(){
 	xhr.responseType = 'json';
 	xhr.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
-			updateLocOnPage(xhr.response);
-			getCableType();
+			updateCablesOnPage(xhr.response);
+			//getCableType();
 		}
 		if(this.status != 200){
 			console.log(xhr.response, this.status);
@@ -17,13 +17,10 @@ window.onload = function getLoc(){
 	xhr.send();
 }
 
-function updateLocOnPage(locations){
-		console.log(locations);
-		for (var i = 0; i<locations.length; i++){
-			document.getElementById("from_loc").innerHTML += "<option value="+locations[i].location_id+">"+
-			locations[i].building+"  -->  "+locations[i].closet+"</option>";
-			// document.getElementById("to_loc").innerHTML += "<option value="+locations[i].location_id+">"+
-			// locations[i].building+"  -->  "+locations[i].closet+"</option>";
+function updateCablesOnPage(cables){
+		for (var i = 0; i<cables.length; i++){
+			console.log(cables[i]);
+			document.getElementById("cable").innerHTML += "<option value=" + cables[i].cable_id + ">" + cables[i].from_building + " -- " + cables[i].from_closet + " ==> " + cables[i].to_dest_building + " -- " + cables[i].to_closet + "</option>";
 		}
 		return
 }
