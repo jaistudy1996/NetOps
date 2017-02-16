@@ -35,6 +35,8 @@ router.get('/getCableType', function(req, res, next){
 router.post('/addCable', function(req, res, next){
 	// TODO: save this data in the database.
 	console.log(req.body);
+	db.query("INSERT into Cables_fiber (from_location, dest_location, num_of_tubes, enclosure_no, type, type2, type3)")
+	res.send(req.body);
 });
 
 module.exports = router;

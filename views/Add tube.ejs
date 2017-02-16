@@ -4,6 +4,35 @@
 	<title><%= title %></title>
 </head>
 <body>
+    <h1>Add Tubes</h1>
+    <p>Add cables to database.</p>
 
-</body>
+    <div>
+        <form method="post" action="/tube/addTube">
+            <fieldset>
+                <pre><label>Select a <strong>from</strong> location: <select name="from_loc" id="from_loc" required>
+                  		    <option value="" selected disabled>Select location</option>
+                        </select></label>               </pre>
+            </fieldset>
+
+            
+            <fieldset>
+                <label>Select cable type: 
+            	   <select id="cable_type" name="cable_type" required>
+            		  <option value="" disabled selected>Select cable type</option>
+            	   </select>
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <label>What are the number of tubes in this cable?
+            	   <input type="number" name="no_of_tubes" id="number_tubes" min=0 required>
+                </label>
+            <br><br>
+            <button type="submit" id="cable_button">Save cable data</button>
+            </fieldset>
+        </form>
+    </div>
+    <script type="text/javascript" src='javascripts/getLocations_tube.js'></script>
+  </body>
 </html>
