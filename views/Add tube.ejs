@@ -10,25 +10,18 @@
     <div>
         <form method="post" action="/tube/addTube">
             <fieldset>
-                <pre><label>Select a cable: <select name="cable_names" id="cable" required>
+                <pre><label>Select a cable: <select name="cable_names" id="cable" required onchange="updateTubeDataOnPage(this.value)">
                   		    <option value="" selected disabled>Select location</option>
                         </select></label>               </pre>
             </fieldset>
 
             
-            <fieldset>
-                <label id="tubes_info">Update Tube data: 
+            <div id="tubes_info">
+                <label >
             	   
                 </label>
-            </fieldset>
-
-            <fieldset>
-                <label>What are the number of tubes in this cable?
-            	   <input type="number" name="no_of_tubes" id="number_tubes" min=0 required>
-                </label>
-            <br><br>
-            <button type="submit" id="cable_button">Save cable data</button>
-            </fieldset>
+            </div>
+            <button type="submit" id="cable_button">Save tube data</button>
         </form>
     </div>
     <script type="text/javascript" src='javascripts/getLocations_tube.js'></script>
