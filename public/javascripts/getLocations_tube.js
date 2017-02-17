@@ -33,6 +33,7 @@ function updateTubeDataOnPage(cableID){
 			var num_of_tubes = cables[i].num_of_tubes;
 			document.getElementById("tubes_info").innerHTML = "<fieldset id='total_tubes'>Total tubes: " + num_of_tubes + "</fieldset>";
 			addInputForStrands(num_of_tubes);
+			getStrandData(cableID); // This function will get the strand info from server
 		}
 	}
 }
@@ -45,4 +46,32 @@ function addInputForStrands(numOfTubes){
 }
 
 //TODO: Get present number of strands for the current tube. 
+function getStrandData(cableID){
+	var xhr = new XMLHttpRequest();
+	var urlForXHR = '/tube/getStrandData/'+cableID;
+	xhr.open('GET', urlForXHR, true);
+	xhr.responseType = 'json';
+	xhr.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			updateStrandDataOnPage(xhr.response);
+		}
+		if(this.status != 200){
+			console.log(xhr.response, this.status);
+		}
+	}
+	xhr.send();
+}
 
+function updateStrandDataOnPage(strands){
+	var tubesOnPage = document.getElementsByName("tube");
+	if(strands.length != 0){
+		for(var i=0; i<tubesOnPage.length; i++){
+			tubesOnPage[i].value = strands[i].num_of_strands;
+		}
+	}
+	else{
+		for(var i=0; i<tubesOnPage.length; i++){
+			tubesOnPage[i].value = 0;
+		}
+	}
+}
