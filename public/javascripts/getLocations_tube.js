@@ -41,7 +41,7 @@ function updateTubeDataOnPage(cableID){
 // Add input boxes for corresponding to num_of_strands parameter from cables.
 function addInputForStrands(numOfTubes){
 	for(var i=1; i<=numOfTubes; i++){
-		document.getElementById("total_tubes").innerHTML += "<br><label>Tube "+ i +" has: <input class='tube' type='number' min='0' required> strands. </label>";
+		document.getElementById("total_tubes").innerHTML += "<br><label>Tube "+ i +" has: <input name='tubes_data' class='tube' type='number' min='0' required> strands. </label>";
 	}
 }
 
