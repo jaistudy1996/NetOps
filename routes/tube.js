@@ -35,7 +35,23 @@ router.get('/getStrandData/:cableID', function(req, res, next){
 	});
 });
 
+router.post('/updateStrandData', function(req, res, next){
+	var cableID = req.body.cable_name_id;
+	for(item in req.body){
+		if(item != "cable_name_id"){
+			db.query("UPDATE Tubes_fiber SET num_of_strands = ? where cable_id = ? and tube_id = ?", [req.body[item], cableID, item], function(err, results){
+				if(err){
+					console.log(err);
+				}
+				console.log(results);
+			});
+		}
+	}
+	res.send(req.body);
+});
+
 router.post('/addTube', function(req, res, next){
+	// TODO update it acc to new tube implementation.
 	var cableID = req.body.cable_name_id;
 	db.query("SELECT * from Cables_fiber where cable_id = ?", [cableID], function(err, results){
 		if(err){

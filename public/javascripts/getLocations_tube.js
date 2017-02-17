@@ -41,7 +41,7 @@ function updateTubeDataOnPage(cableID){
 // Add input boxes for corresponding to num_of_strands parameter from cables.
 function addInputForStrands(numOfTubes){
 	for(var i=1; i<=numOfTubes; i++){
-		document.getElementById("total_tubes").innerHTML += "<br><label>Tube "+ i +" has: <input name='tube' type='number' min='0' required> strands. </label>";
+		document.getElementById("total_tubes").innerHTML += "<br><label>Tube "+ i +" has: <input class='tube' type='number' min='0' required> strands. </label>";
 	}
 }
 
@@ -63,18 +63,24 @@ function getStrandData(cableID){
 }
 
 function updateStrandDataOnPage(strands, cableID){
-	var tubesOnPage = document.getElementsByName("tube");
+	console.log(strands);
+	var tubesOnPage = document.getElementsByClassName("tube");
+	console.log(tubesOnPage);
 	if(strands.length != 0){
 		for(var i=0; i<tubesOnPage.length; i++){
+			tubesOnPage[i].name = strands[i].tube_id;
 			tubesOnPage[i].value = strands[i].num_of_strands;
 		}
-		// Add a new update button that will just update the strand infomation.
+		//new update button that will just update the strand infomation.
 		document.getElementById("strand_update_button").style.display = "inline";
+		document.getElementById("save_strand_info").style.display = "none";
 	}
 	else{
 		for(var i=0; i<tubesOnPage.length; i++){
 			tubesOnPage[i].value = 0;
 		}
 		document.getElementById("strand_update_button").style.display = "none";
+		document.getElementById("save_strand_info").style.display = "inline";
+
 	}
 }
