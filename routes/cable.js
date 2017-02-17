@@ -50,7 +50,7 @@ router.post('/addCable', function(req, res, next){
 			}
 			console.log(result);
 	});
-	res.send(req.body);
+	res.redirect("/tube");
 });
 
 module.exports = router;

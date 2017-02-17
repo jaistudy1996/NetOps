@@ -47,7 +47,7 @@ router.post('/updateStrandData', function(req, res, next){
 			});
 		}
 	}
-	res.send(req.body);
+	res.redirect("/tube");
 });
 
 router.post('/addTube', function(req, res, next){
@@ -59,7 +59,6 @@ router.post('/addTube', function(req, res, next){
 			return;
 		}
 		if(results[0].num_of_tubes == req.body.tubes_data.length){
-			console.log(results);
 			for(var i=0; i<req.body.tubes_data.length; i++){
 				db.query("INSERT INTO Tubes_fiber (cable_id, num_of_strands) values (?, ?)", [cableID, req.body.tubes_data[i]], function(err, results){
 					if(err){
@@ -74,7 +73,7 @@ router.post('/addTube', function(req, res, next){
 			res.send("Wrong number of tubes received.");
 		}
 	});
-	res.send(req.body);
+	res.redirect("/tube");
 });
 
 module.exports = router;
