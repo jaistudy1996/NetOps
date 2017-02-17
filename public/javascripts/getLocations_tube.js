@@ -53,7 +53,7 @@ function getStrandData(cableID){
 	xhr.responseType = 'json';
 	xhr.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
-			updateStrandDataOnPage(xhr.response);
+			updateStrandDataOnPage(xhr.response, cableID);
 		}
 		if(this.status != 200){
 			console.log(xhr.response, this.status);
@@ -62,16 +62,19 @@ function getStrandData(cableID){
 	xhr.send();
 }
 
-function updateStrandDataOnPage(strands){
+function updateStrandDataOnPage(strands, cableID){
 	var tubesOnPage = document.getElementsByName("tube");
 	if(strands.length != 0){
 		for(var i=0; i<tubesOnPage.length; i++){
 			tubesOnPage[i].value = strands[i].num_of_strands;
 		}
+		// Add a new update button that will just update the strand infomation.
+		document.getElementById("strand_update_button").style.display = "inline";
 	}
 	else{
 		for(var i=0; i<tubesOnPage.length; i++){
 			tubesOnPage[i].value = 0;
 		}
+		document.getElementById("strand_update_button").style.display = "none";
 	}
 }

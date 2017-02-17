@@ -8,7 +8,7 @@
     <p>Add cables to database.</p>
 
     <div>
-        <form method="post" action="/tube/addTube">
+        <form id="tube_form" method="post" action="/tube/addTube">
             <fieldset>
                 <pre><label>Select a cable: <select name="cable_name_id" id="cable" required onchange="updateTubeDataOnPage(this.value)">
                   		    <option value="" selected disabled>Select location</option>
@@ -21,7 +21,8 @@
             	   
                 </label>
             </div>
-            <button type="submit" id="cable_button">Save tube data</button>
+            <button type="submit">Save tube data</button>
+            <button type="submit" formaction="/tube/updateStrandData" id="strand_update_button" style="display: none">Update strand data</button>
         </form>
     </div>
     <script type="text/javascript" src='javascripts/getLocations_tube.js'></script>
