@@ -11,11 +11,15 @@
 		<form method="post" id="strand_form" action='/strand/addStrand'>
 			<fieldset>
 				<label>
-					Select a cable: <select id="cable_select" required>
+					Select a cable: <select id="cable_select" required onchange="updateTubeDataOnPage(this.value)">
 						<option value="" selected disabled>Select a cable</option>
 					</select>
 				</label>
 			</fieldset>
+
+			<div id="tubes_info">
+				
+			</div>
 		</form>
 	</div>
 	<script type="text/javascript" src="/javascripts/strand.js"></script>

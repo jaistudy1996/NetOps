@@ -1,5 +1,5 @@
 // Author: Jayant Arora
-// Functions to retrieve all cables from database.
+// Functions to retrieve all cables and info on tubes from database.
 
 var cables; // Global variable to store all the cables retrieved from the database.
 
