@@ -69,23 +69,10 @@ function updateStrandDataOnPage(strands, cableID){
 			tubesOnPage[i].name = strands[i].tube_id;
 			tubesOnPage[i].value = strands[i].num_of_strands;
 			console.log(tubesOnPage[i].parentNode.parentNode);
-			var table = document.createElement('table');
-			var tableBody = document.createElement('tbody');
-			var row = document.createElement('tr');
-			var tubeIDHead = document.createElement('th');
-			var strandIDHead = document.createElement('th');
-			var strandColorHead = document.createElement('th');
-			var textTube = document.createTextNode("TubeId");
-			// var textStrand = document.createTextNode("StrandID");
-			var textColor = document.createTextNode("Strand Color");
-			tubeIDHead.appendChild(textTube);
-			// strandIDHead.appendChild(textStrand);
-			strandColorHead.appendChild(textColor);
-			row.appendChild(tubeIDHead);
-			// row.appendChild(strandIDHead);
-			row.appendChild(strandColorHead);
-			tableBody.appendChild(row);
-			table.appendChild(tableBody);
+			var table = makeTable();
+			for(var j=0; j<strands[i].num_of_strands; j++){
+				addRows(table, strands[i].tube_id, "blue");
+			}
 			tubesOnPage[i].parentNode.parentNode.appendChild(table);
 		}
 	}
@@ -111,7 +98,24 @@ function makeTable(){
 
 	row.appendChild(tubeIDHead);
 	row.appendChild(strandColorHead);
-	
+
 	tableBody.appendChild(row);
 	table.appendChild(tableBody);
+
+	return table;
+}
+
+function addRows(table, tubeId, color){
+	var row = document.createElement('tr');
+	var tubeIdData = document.createElement('td');
+	var strColorData = document.createElement('td');
+
+	var idText = document.createTextNode(tubeId);
+	var colorText = document.createTextNode(color);
+
+	tubeIdData.appendChild(idText);
+	strColorData.appendChild(colorText);
+	row.appendChild(tubeIdData);
+	row.appendChild(strColorData);
+	table.appendChild(row);
 }
