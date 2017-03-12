@@ -95,3 +95,23 @@ function updateStrandDataOnPage(strands, cableID){
 		}
 	}
 }
+
+function makeTable(){
+	var table = document.createElement('table');
+	var tableBody = document.createElement('tbody');
+	var row = document.createElement('tr');
+	var tubeIDHead = document.createElement('th');
+	var strandIDHead = document.createElement('th');
+	var strandColorHead = document.createElement('th');
+	var textTube = document.createTextNode("TubeId");
+	var textColor = document.createTextNode("Strand Color");
+
+	tubeIDHead.appendChild(textTube);
+	strandColorHead.appendChild(textColor);
+
+	row.appendChild(tubeIDHead);
+	row.appendChild(strandColorHead);
+	
+	tableBody.appendChild(row);
+	table.appendChild(tableBody);
+}
