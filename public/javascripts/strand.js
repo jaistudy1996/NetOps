@@ -67,17 +67,19 @@ function updateStrandDataOnPage(strands, cableID){
 		for(var i=0; i<tubesOnPage.length; i++){
 			tubesOnPage[i].name = strands[i].tube_id;
 			tubesOnPage[i].value = strands[i].num_of_strands;
+			console.log(tubesOnPage[i].parentNode.parentNode);
+			var table = document.createElement('table');
+			var tableBody = document.createElement('tbody');
+			var row = document.createElement('tr');
+			var tubeIDHead = document.createElement('th');
+			var strandIDHead = document.createElement('th');
+			var strandColorHead = document.createElement('th');
+			// tubesOnPage[i].parentNode.parentNode.appendChild = "<table style='width:100%'><th>TubeId</th><th>StrandID</th><th>Strand Color</th></table>";
 		}
-		//new update button that will just update the strand infomation.
-		//document.getElementById("strand_update_button").style.display = "inline";
-		//document.getElementById("save_strand_info").style.display = "none";
 	}
-	else{
-		for(var i=0; i<tubesOnPage.length; i++){
-			tubesOnPage[i].value = 0;
-		}
-		//document.getElementById("strand_update_button").style.display = "none";
-		//document.getElementById("save_strand_info").style.display = "inline";
-
-	}
+	// else{
+	// 	for(var i=0; i<tubesOnPage.length; i++){
+	// 		tubesOnPage[i].value = 0;
+	// 	}
+	// }
 }
