@@ -13,4 +13,14 @@ router.get('/', function(req, res){
 	res.render("Add strand");
 });
 
+router.get('/strandColor/', function(req, res){
+	db.query("SELECT * FROM strand_color_fiber", function(error, resutls){
+		if(error){
+			console.log(error);
+			res.send("SERVER ERROR");
+		}
+		res.send(results);
+	});
+});
+
 module.exports = router;
