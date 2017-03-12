@@ -76,23 +76,22 @@ function updateStrandDataOnPage(strands, cableID){
 			var strandIDHead = document.createElement('th');
 			var strandColorHead = document.createElement('th');
 			var textTube = document.createTextNode("TubeId");
-			var textStrand = document.createTextNode("StrandID");
+			// var textStrand = document.createTextNode("StrandID");
 			var textColor = document.createTextNode("Strand Color");
-			// tubesOnPage[i].parentNode.parentNode.appendChild = "<table style='width:100%'><th>TubeId</th><th>StrandID</th><th>Strand Color</th></table>";
 			tubeIDHead.appendChild(textTube);
-			strandIDHead.appendChild(textStrand);
+			// strandIDHead.appendChild(textStrand);
 			strandColorHead.appendChild(textColor);
 			row.appendChild(tubeIDHead);
-			row.appendChild(strandIDHead);
+			// row.appendChild(strandIDHead);
 			row.appendChild(strandColorHead);
 			tableBody.appendChild(row);
 			table.appendChild(tableBody);
 			tubesOnPage[i].parentNode.parentNode.appendChild(table);
 		}
 	}
-	// else{
-	// 	for(var i=0; i<tubesOnPage.length; i++){
-	// 		tubesOnPage[i].value = 0;
-	// 	}
-	// }
+	else{
+		for(var i=0; i<tubesOnPage.length; i++){
+			tubesOnPage[i].value = 0;
+		}
+	}
 }
