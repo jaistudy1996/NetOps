@@ -30,6 +30,7 @@ function updateTubeDataOnPage(cableID){
 	for(var i=0; i<cables.length; i++){
 		if(cables[i].cable_id == cableID){
 			var num_of_tubes = cables[i].num_of_tubes;
+			console.log(document.getElementById("tubes_info").innerHTML);
 			document.getElementById("tubes_info").innerHTML = "<fieldset id='total_tubes'>Total tubes: " + num_of_tubes + "</fieldset>";
 			addInputForStrands(num_of_tubes);
 			getStrandData(cableID); // This function will get the strand info from server
@@ -74,7 +75,19 @@ function updateStrandDataOnPage(strands, cableID){
 			var tubeIDHead = document.createElement('th');
 			var strandIDHead = document.createElement('th');
 			var strandColorHead = document.createElement('th');
+			var textTube = document.createTextNode("TubeId");
+			var textStrand = document.createTextNode("StrandID");
+			var textColor = document.createTextNode("Strand Color");
 			// tubesOnPage[i].parentNode.parentNode.appendChild = "<table style='width:100%'><th>TubeId</th><th>StrandID</th><th>Strand Color</th></table>";
+			tubeIDHead.appendChild(textTube);
+			strandIDHead.appendChild(textStrand);
+			strandColorHead.appendChild(textColor);
+			row.appendChild(tubeIDHead);
+			row.appendChild(strandIDHead);
+			row.appendChild(strandColorHead);
+			tableBody.appendChild(row);
+			table.appendChild(tableBody);
+			tubesOnPage[i].parentNode.parentNode.appendChild(table);
 		}
 	}
 	// else{
