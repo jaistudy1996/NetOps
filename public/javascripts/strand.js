@@ -68,8 +68,9 @@ function updateStrandDataOnPage(strands, cableID){
 		for(var i=0; i<tubesOnPage.length; i++){
 			tubesOnPage[i].name = strands[i].tube_id;
 			tubesOnPage[i].value = strands[i].num_of_strands;
-			console.log(tubesOnPage[i].parentNode.parentNode);
+			// console.log(tubesOnPage[i].parentNode.parentNode);
 			var table = makeTable();
+			getStrandColor();
 			for(var j=0; j<strands[i].num_of_strands; j++){
 				addRows(table, strands[i].tube_id, "blue");
 			}
@@ -118,4 +119,20 @@ function addRows(table, tubeId, color){
 	row.appendChild(tubeIdData);
 	row.appendChild(strColorData);
 	table.appendChild(row);
+}
+
+function getStrandColor(){
+	var xhr = new XMLHttpRequest();
+	var url = '/strand/strandColor/';
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			return xhr.response;
+		}
+		else{
+			console.log(xhr.response);
+		}
+	}
+	xhr.send();
 }

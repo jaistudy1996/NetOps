@@ -9,12 +9,12 @@ var db = mysql.createConnection({
 	database: 'network'
 });
 
-router.get('/', function(req, res){
+router.get('/', function(req, res, next){
 	res.render("Add strand");
 });
 
-router.get('/strandColor/', function(req, res){
-	db.query("SELECT * FROM strand_color_fiber", function(error, resutls){
+router.get('/strandColor/', function(req, res, next){
+	db.query("SELECT * FROM strand_color_fiber", function(error, results){
 		if(error){
 			console.log(error);
 			res.send("SERVER ERROR");
