@@ -70,11 +70,14 @@ function updateStrandDataOnPage(strands, cableID){
 			tubesOnPage[i].value = strands[i].num_of_strands;
 			// console.log(tubesOnPage[i].parentNode.parentNode);
 			var table = makeTable();
-			getStrandColor();
-			for(var j=0; j<strands[i].num_of_strands; j++){
-				addRows(table, strands[i].tube_id, "blue");
-			}
-			tubesOnPage[i].parentNode.parentNode.appendChild(table);
+			var colors;
+			getStrandColor(function(response){
+				colors = response;
+				for(var j=0; j<strands[i].num_of_strands; j++){
+					addRows(table, strands[i].tube_id, colors);
+				}
+				tubesOnPage[i].parentNode.parentNode.appendChild(table);
+			});
 		}
 	}
 	else{
@@ -106,13 +109,23 @@ function makeTable(){
 	return table;
 }
 
-function addRows(table, tubeId, color){
+function addRows(table, tubeId, colors, select){
+	// TODO add default selection of color
 	var row = document.createElement('tr');
 	var tubeIdData = document.createElement('td');
 	var strColorData = document.createElement('td');
 
+	var colorSelect = document.createElement('select');
+	for(var i=0; i<colors.length; i++){
+		var option = document.createElement('option');
+		var data = document.createTextNode(colors[i].color_name);
+		option.value = colors[i].color_id;
+		colorSelect.appendChild(option);
+	}
+	
 	var idText = document.createTextNode(tubeId);
 	var colorText = document.createTextNode(color);
+
 
 	tubeIdData.appendChild(idText);
 	strColorData.appendChild(colorText);
@@ -121,18 +134,21 @@ function addRows(table, tubeId, color){
 	table.appendChild(row);
 }
 
-function getStrandColor(){
+function getStrandColor(callback){
 	var xhr = new XMLHttpRequest();
 	var url = '/strand/strandColor/';
 	xhr.open('GET', url, true);
 	xhr.responseType = 'json';
 	xhr.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
-			return xhr.response;
+			console.log(xhr.response);
+			callback(xhr.response);
 		}
-		else{
+		else if(this.status != 200){
 			console.log(xhr.response);
 		}
 	}
 	xhr.send();
 }
+
+
