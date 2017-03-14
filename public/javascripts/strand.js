@@ -60,24 +60,30 @@ function getStrandData(cableID){
 	xhr.send();
 }
 
+var colors;
+
 function updateStrandDataOnPage(strands, cableID){
 	console.log(strands);
 	var tubesOnPage = document.getElementsByClassName("tube");
 	console.log(tubesOnPage);
+	
 	if(strands.length != 0){
 		for(var i=0; i<tubesOnPage.length; i++){
 			tubesOnPage[i].name = strands[i].tube_id;
 			tubesOnPage[i].value = strands[i].num_of_strands;
 			// console.log(tubesOnPage[i].parentNode.parentNode);
-			var table = makeTable();
-			var colors;
-			getStrandColor(function(response){
-				colors = response;
-				for(var j=0; j<strands[i].num_of_strands; j++){
-					addRows(table, strands[i].tube_id, colors);
-				}
-				tubesOnPage[i].parentNode.parentNode.appendChild(table);
-			});
+			var table = makeTable()
+			getStrandColor()
+			.on(
+			console.log(window.colors));
+			// getStrandColor(function(response){
+			// 	colors = response;
+			// 	console.log(i);
+			// 	for(var j=0; j<strands[i].num_of_strands; j++){
+			// 		addRows(table, strands[i].tube_id);
+			// 	}
+			// 	tubesOnPage[i].parentNode.parentNode.appendChild(table);
+			// });
 		}
 	}
 	else{
@@ -132,9 +138,10 @@ function addRows(table, tubeId, colors, select){
 	row.appendChild(tubeIdData);
 	row.appendChild(strColorData);
 	table.appendChild(row);
+	return;
 }
 
-function getStrandColor(callback){
+function getStrandColor(){
 	var xhr = new XMLHttpRequest();
 	var url = '/strand/strandColor/';
 	xhr.open('GET', url, true);
@@ -142,7 +149,7 @@ function getStrandColor(callback){
 	xhr.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
 			console.log(xhr.response);
-			callback(xhr.response);
+			window.colors = xhr.response;
 		}
 		else if(this.status != 200){
 			console.log(xhr.response);
