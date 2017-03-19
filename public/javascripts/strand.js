@@ -89,22 +89,34 @@ function updateStrandDataOnPage(strands, cableID){
 	console.log(strands);
 	var tubesOnPage = document.getElementsByClassName("tube");
 	console.log(tubesOnPage);
-	
+
 	if(strands.length != 0){
 		for(var i=0; i<tubesOnPage.length; i++){
 			tubesOnPage[i].name = strands[i].tube_id;
 			tubesOnPage[i].value = strands[i].num_of_strands;
-			// console.log(tubesOnPage[i].parentNode.parentNode);
+
+			// Make call to server to get individual strand information
+			var xhr = new XMLHttpRequest();
+			var xhrURL = "/strand/strandInfo/" + strands[i].tube_id;
+			xhr.open('GET', xhrURL, true);
+			// xhr.responseType = 'json';
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					console.log(xhr.response);
+				}
+				if(this.status != 200){
+					console.log(xhr.response, this.status);
+				}
+			}
+			xhr.send();
+			console.log(xhrURL);
+
 			var table = makeTable()
-			console.log(colors);
-			// getStrandColor(function(response){
-			// 	colors = response;
-			// 	console.log(i);
+			console.log(colors);  // ===== remove this
 			for(var j=0; j<strands[i].num_of_strands; j++){
 				addRows(table, strands[i].tube_id, colors);
 			}
 			tubesOnPage[i].parentNode.parentNode.appendChild(table);
-			// });
 		}
 	}
 	else{
