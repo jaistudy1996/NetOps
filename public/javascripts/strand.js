@@ -102,13 +102,15 @@ function updateStrandDataOnPage(strands, cableID){
 			xhr.responseType = 'json';
 			var st = strands[i];	// Define again for scope issues.
 			var tu = tubesOnPage[i]; // Define agian for scope issues.
+			var resp;
 			xhr.onreadystatechange = function(){
 				if(this.readyState == 4 && this.status == 200){
-					console.log(xhr.response);
+					console.log(st.tube_id, xhr.response.length);
+					resp = xhr.response;
 					var table = makeTable()
 					console.log(colors);  // ===== remove this
 					for(var j=0; j<st.num_of_strands; j++){
-						if(j < xhr.response.length){
+						if(j < resp.length){
 							var str_color = xhr.response[j].strand_color;
 							var str_id = xhr.response[j].strand_id;
 						}
@@ -119,6 +121,7 @@ function updateStrandDataOnPage(strands, cableID){
 						addRows(table, st.tube_id, colors, str_color, str_id);
 					}
 					tu.parentNode.parentNode.appendChild(table);
+					return;
 				}
 				if(this.status != 200){
 					console.log(xhr.response, this.status);
