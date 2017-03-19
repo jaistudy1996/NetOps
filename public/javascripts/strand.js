@@ -55,7 +55,7 @@ function updateTubeDataOnPage(cableID){
 	for(var i=0; i<cables.length; i++){
 		if(cables[i].cable_id == cableID){
 			var num_of_tubes = cables[i].num_of_tubes;
-			console.log(document.getElementById("tubes_info").innerHTML);
+			// console.log(document.getElementById("tubes_info").innerHTML);
 			document.getElementById("tubes_info").innerHTML = "<fieldset id='total_tubes'>Total tubes: " + num_of_tubes + "</fieldset>";
 			addInputForStrands(num_of_tubes);
 			getStrandData(cableID); // This function will get the strand info from server
@@ -95,41 +95,44 @@ function updateStrandDataOnPage(strands, cableID){
 			tubesOnPage[i].name = strands[i].tube_id;
 			tubesOnPage[i].value = strands[i].num_of_strands;
 
+			var st = strands;	// Define again for scope issues.
+			var tu = tubesOnPage; // Define agian for scope issues.
+
 			// Make call to server to get individual strand information
-			var xhr = new XMLHttpRequest();
-			var xhrURL = "/strand/strandInfo/" + strands[i].tube_id;
-			xhr.open('GET', xhrURL, true);
-			xhr.responseType = 'json';
-			var st = strands[i];	// Define again for scope issues.
-			var tu = tubesOnPage[i]; // Define agian for scope issues.
-			var resp;
-			xhr.onreadystatechange = function(){
-				if(this.readyState == 4 && this.status == 200){
-					console.log(st.tube_id, xhr.response.length);
-					resp = xhr.response;
-					var table = makeTable()
-					console.log(colors);  // ===== remove this
-					for(var j=0; j<st.num_of_strands; j++){
-						if(j < resp.length){
-							var str_color = xhr.response[j].strand_color;
-							var str_id = xhr.response[j].strand_id;
+			var strInfo = (function (tubes, strands, i){
+				var xhr = new XMLHttpRequest();
+				var xhrURL = "/strand/strandInfo/" + strands[i].tube_id;
+				xhr.open('GET', xhrURL, true);
+				xhr.responseType = 'json';
+
+				xhr.onreadystatechange = function(){
+					if(this.readyState == 4 && this.status == 200){
+						console.log(st[i].tube_id, xhr.response.length);
+						var table = makeTable()
+						console.log(colors);  // ===== remove this
+						for(var j=0; j<st[i].num_of_strands; j++){
+							if(j < xhr.response.length){
+								var str_color = xhr.response[j].strand_color;
+								var str_id = xhr.response[j].strand_id;
+							}
+							else{
+								var str_color = 'NOT SET';
+								var str_id = "NOT SET";
+							}
+							addRows(table, st[i].tube_id, colors, str_color, str_id);
 						}
-						else{
-							var str_color = 'NOT SET';
-							var str_id = "NOT SET";
-						}
-						addRows(table, st.tube_id, colors, str_color, str_id);
+						tu[i].parentNode.parentNode.appendChild(table);
+						return;
 					}
-					tu.parentNode.parentNode.appendChild(table);
-					return;
+					if(this.status != 200){
+						console.log(xhr.response, this.status);
+					}
 				}
-				if(this.status != 200){
-					console.log(xhr.response, this.status);
-				}
-			}
-			xhr.send();
+				xhr.send();
+			})(tu, st, i);
 		}
 	}
+
 	else{
 		for(var i=0; i<tubesOnPage.length; i++){
 			tubesOnPage[i].value = 0;
