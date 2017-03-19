@@ -96,14 +96,14 @@ function updateStrandDataOnPage(strands, cableID){
 			tubesOnPage[i].value = strands[i].num_of_strands;
 			// console.log(tubesOnPage[i].parentNode.parentNode);
 			var table = makeTable()
-			console.log(window.colors);
+			console.log(colors);
 			// getStrandColor(function(response){
 			// 	colors = response;
 			// 	console.log(i);
-			// 	for(var j=0; j<strands[i].num_of_strands; j++){
-			// 		addRows(table, strands[i].tube_id);
-			// 	}
-			// 	tubesOnPage[i].parentNode.parentNode.appendChild(table);
+			for(var j=0; j<strands[i].num_of_strands; j++){
+				addRows(table, strands[i].tube_id, colors);
+			}
+			tubesOnPage[i].parentNode.parentNode.appendChild(table);
 			// });
 		}
 	}
@@ -147,15 +147,16 @@ function addRows(table, tubeId, colors, select){
 		var option = document.createElement('option');
 		var data = document.createTextNode(colors[i].color_name);
 		option.value = colors[i].color_id;
+		option.appendChild(data);
 		colorSelect.appendChild(option);
 	}
 	
 	var idText = document.createTextNode(tubeId);
-	var colorText = document.createTextNode(color);
+	// var colorText = document.createTextNode(color);
 
 
 	tubeIdData.appendChild(idText);
-	strColorData.appendChild(colorText);
+	strColorData.appendChild(colorSelect);
 	row.appendChild(tubeIdData);
 	row.appendChild(strColorData);
 	table.appendChild(row);
