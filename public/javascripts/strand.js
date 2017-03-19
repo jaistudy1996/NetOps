@@ -2,8 +2,14 @@
 // Function to retrieve all tubes with respect to cables from db.
 
 var cables; // Global variable to store cables from db.
+var colors; // Global varibale to store all colors of fiber.
 
-window.onload = function getLoc(){
+window.onload = function (){
+	getStrandColor();
+	getLoc();
+}
+
+function getLoc(){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/tube/getCables', true);
 	xhr.responseType = 'json';
@@ -18,6 +24,25 @@ window.onload = function getLoc(){
 	}
 	xhr.send();
 }
+
+function getStrandColor(){
+	var xhr = new XMLHttpRequest();
+	var url = '/strand/strandColor/';
+	xhr.open('GET', url, true);
+	xhr.responseType = 'json';
+	xhr.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			// console.log(xhr.response);
+			window.colors = xhr.response;
+			return;
+		}
+		else if(this.status != 200){
+			console.log(xhr.response);
+		}
+	}
+	xhr.send();
+}
+
 
 function updateCablesOnPage(cables){
 		for (var i = 0; i<cables.length; i++){
@@ -60,8 +85,6 @@ function getStrandData(cableID){
 	xhr.send();
 }
 
-var colors;
-
 function updateStrandDataOnPage(strands, cableID){
 	console.log(strands);
 	var tubesOnPage = document.getElementsByClassName("tube");
@@ -73,9 +96,7 @@ function updateStrandDataOnPage(strands, cableID){
 			tubesOnPage[i].value = strands[i].num_of_strands;
 			// console.log(tubesOnPage[i].parentNode.parentNode);
 			var table = makeTable()
-			getStrandColor()
-			.on(
-			console.log(window.colors));
+			console.log(window.colors);
 			// getStrandColor(function(response){
 			// 	colors = response;
 			// 	console.log(i);
@@ -140,22 +161,4 @@ function addRows(table, tubeId, colors, select){
 	table.appendChild(row);
 	return;
 }
-
-function getStrandColor(){
-	var xhr = new XMLHttpRequest();
-	var url = '/strand/strandColor/';
-	xhr.open('GET', url, true);
-	xhr.responseType = 'json';
-	xhr.onreadystatechange = function(){
-		if(this.readyState == 4 && this.status == 200){
-			console.log(xhr.response);
-			window.colors = xhr.response;
-		}
-		else if(this.status != 200){
-			console.log(xhr.response);
-		}
-	}
-	xhr.send();
-}
-
 
