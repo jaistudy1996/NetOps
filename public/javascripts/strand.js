@@ -99,24 +99,32 @@ function updateStrandDataOnPage(strands, cableID){
 			var xhr = new XMLHttpRequest();
 			var xhrURL = "/strand/strandInfo/" + strands[i].tube_id;
 			xhr.open('GET', xhrURL, true);
-			// xhr.responseType = 'json';
+			xhr.responseType = 'json';
+			var st = strands[i];	// Define again for scope issues.
+			var tu = tubesOnPage[i]; // Define agian for scope issues.
 			xhr.onreadystatechange = function(){
 				if(this.readyState == 4 && this.status == 200){
 					console.log(xhr.response);
+					var table = makeTable()
+					console.log(colors);  // ===== remove this
+					for(var j=0; j<st.num_of_strands; j++){
+						if(j < xhr.response.length){
+							var str_color = xhr.response[j].strand_color;
+							var str_id = xhr.response[j].strand_id;
+						}
+						else{
+							var str_color = 'NOT SET';
+							var str_id = "NOT SET";
+						}
+						addRows(table, st.tube_id, colors, str_color, str_id);
+					}
+					tu.parentNode.parentNode.appendChild(table);
 				}
 				if(this.status != 200){
 					console.log(xhr.response, this.status);
 				}
 			}
 			xhr.send();
-			console.log(xhrURL);
-
-			var table = makeTable()
-			console.log(colors);  // ===== remove this
-			for(var j=0; j<strands[i].num_of_strands; j++){
-				addRows(table, strands[i].tube_id, colors);
-			}
-			tubesOnPage[i].parentNode.parentNode.appendChild(table);
 		}
 	}
 	else{
@@ -133,13 +141,16 @@ function makeTable(){
 	var tubeIDHead = document.createElement('th');
 	var strandIDHead = document.createElement('th');
 	var strandColorHead = document.createElement('th');
-	var textTube = document.createTextNode("TubeId");
+	var textTube = document.createTextNode("Tube Id");
+	var strandIDText = document.createTextNode("Strand ID")
 	var textColor = document.createTextNode("Strand Color");
 
+	strandIDHead.appendChild(strandIDText);
 	tubeIDHead.appendChild(textTube);
 	strandColorHead.appendChild(textColor);
 
 	row.appendChild(tubeIDHead);
+	row.appendChild(strandIDHead);
 	row.appendChild(strandColorHead);
 
 	tableBody.appendChild(row);
@@ -148,27 +159,42 @@ function makeTable(){
 	return table;
 }
 
-function addRows(table, tubeId, colors, select){
+function addRows(table, tubeId, colors, select, strandId){
 	// TODO add default selection of color
 	var row = document.createElement('tr');
 	var tubeIdData = document.createElement('td');
+	var strandIdData = document.createElement('td');
 	var strColorData = document.createElement('td');
 
 	var colorSelect = document.createElement('select');
+	//Set default value.
+	var option = document.createElement('option');
+	var data = document.createTextNode('NOT SET');
+	option.disabled = true;
+	option.selected = true;
+	option.value = " ";
+	option.append(data);
+	colorSelect.append(option);
 	for(var i=0; i<colors.length; i++){
 		var option = document.createElement('option');
 		var data = document.createTextNode(colors[i].color_name);
+		if(colors[i].color_id == select){
+			option.selected = true;
+		}
 		option.value = colors[i].color_id;
 		option.appendChild(data);
 		colorSelect.appendChild(option);
 	}
 	
 	var idText = document.createTextNode(tubeId);
+	var strandIdText = document.createTextNode(strandId);
 	// var colorText = document.createTextNode(color);
 
+	strandIdData.appendChild(strandIdText);
 	tubeIdData.appendChild(idText);
 	strColorData.appendChild(colorSelect);
 	row.appendChild(tubeIdData);
+	row.appendChild(strandIdData);
 	row.appendChild(strColorData);
 	table.appendChild(row);
 	return;
