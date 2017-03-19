@@ -23,4 +23,15 @@ router.get('/strandColor/', function(req, res, next){
 	});
 });
 
+router.get('strandInfo/:tubeID', function(req, res, next){
+	var tubeID = req.parmas.tubeID;
+	db.query("SELECT * FROM strands_fiber where tube_id = ?", [tubeID], function(error, results){
+		if(error){
+			console.log(error);
+			res.send("SERVER ERROR");
+		}
+		res.send(results);
+	});
+});
+
 module.exports = router;

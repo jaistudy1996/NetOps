@@ -154,7 +154,6 @@ function addRows(table, tubeId, colors, select){
 	var idText = document.createTextNode(tubeId);
 	// var colorText = document.createTextNode(color);
 
-
 	tubeIdData.appendChild(idText);
 	strColorData.appendChild(colorSelect);
 	row.appendChild(tubeIdData);
@@ -162,4 +161,3 @@ function addRows(table, tubeId, colors, select){
 	table.appendChild(row);
 	return;
 }
-
