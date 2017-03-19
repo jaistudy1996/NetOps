@@ -37,4 +37,9 @@ router.get('/strandInfo/:tubeID', function(req, res, next){
 	});
 });
 
+router.post('/addStrand/', function(req, res, next){
+	console.log(req.body);
+	res.redirect('/strand');
+});
+
 module.exports = router;

@@ -99,6 +99,8 @@ function updateStrandDataOnPage(strands, cableID){
 			var tu = tubesOnPage; // Define agian for scope issues.
 
 			// Make call to server to get individual strand information
+
+			// Use self invoking function to shwo tables for all tubes
 			var strInfo = (function (tubes, strands, i){
 				var xhr = new XMLHttpRequest();
 				var xhrURL = "/strand/strandInfo/" + strands[i].tube_id;
@@ -172,7 +174,11 @@ function addRows(table, tubeId, colors, select, strandId){
 	var strandIdData = document.createElement('td');
 	var strColorData = document.createElement('td');
 
+	// tubeIdData.name = 'tubeID';
+	// strandIdData.name = 'strandId';
+
 	var colorSelect = document.createElement('select');
+	colorSelect.name = "color";
 	//Set default value.
 	var option = document.createElement('option');
 	var data = document.createTextNode('NOT SET');
@@ -186,18 +192,33 @@ function addRows(table, tubeId, colors, select, strandId){
 		var data = document.createTextNode(colors[i].color_name);
 		if(colors[i].color_id == select){
 			option.selected = true;
+			colorSelect.onchange = function(){
+				updateInfo();
+			};
 		}
 		option.value = colors[i].color_id;
 		option.appendChild(data);
 		colorSelect.appendChild(option);
 	}
-	
-	var idText = document.createTextNode(tubeId);
-	var strandIdText = document.createTextNode(strandId);
-	// var colorText = document.createTextNode(color);
+	if(colorSelect.selectedIndex == 0){
+		colorSelect.onchange = function(){
+			saveInfo()
+		};
+	}
 
-	strandIdData.appendChild(strandIdText);
-	tubeIdData.appendChild(idText);
+	var idTextInput = document.createElement('input');
+	var strandIdInput = document.createElement('input');
+
+	idTextInput.name = 'tubeID';
+	idTextInput.value = tubeId;
+	idTextInput.readOnly = true;
+
+	strandIdInput.readOnly = true;
+	strandIdInput.name = 'strandID';
+	strandIdInput.value = strandId;
+	
+	strandIdData.appendChild(strandIdInput);
+	tubeIdData.appendChild(idTextInput);
 	strColorData.appendChild(colorSelect);
 	row.appendChild(tubeIdData);
 	row.appendChild(strandIdData);
@@ -205,3 +226,15 @@ function addRows(table, tubeId, colors, select, strandId){
 	table.appendChild(row);
 	return;
 }
+
+function saveInfo(){
+	document.getElementById('save_strand_info').style.display = 'inline';
+	document.getElementById('strand_update_button').style.display = 'none';
+
+}
+
+function updateInfo(){
+	document.getElementById('strand_update_button').style.display = 'inline';
+	document.getElementById('save_strand_info').style.display = 'none';
+}
+
