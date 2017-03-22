@@ -25,7 +25,7 @@ function load(frame, place, id){
 			}
 		}
 		for(var i=0; i<TRtags.length; i++){
-			if(num != TRtags.length-1 && i != 0){
+			if(num < TRtags.length-1 && i != 0){
 				var td = document.createElement('td');
 				var radio = document.createElement('input');
 				radio.name = 'selection';
@@ -38,8 +38,13 @@ function load(frame, place, id){
 		}
 		try{
 			place = frame.contentWindow.document.querySelector('input[name="selection"]:checked').value;
-			document.getElementById(id).innerHTML = 'Selected ' + id + ' strand has Tube ID = ' + frame.contentWindow.document.getElementsByName('tubeID')[place-1].value + ' Strand ID = ' + frame.contentWindow.document.getElementsByName('strandID')[place-1].value + '.';
-			if(frame.contentWindow.document.getElementsByName('strandID')[place-1].value == 'NOT SET'){
+			var tubeID = frame.contentWindow.document.getElementsByName('tubeID')[place-1].value;
+			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place-1].value
+
+			document.getElementById(id).innerHTML = 'Selected ' + id + ' strand has Tube ID = ' + tubeID + ' Strand ID = ' + strandID + '.';
+
+			// Warning handled here
+			if(strandID == 'NOT SET'){
 				if(id == 'from_strand_details'){
 					document.getElementById('warning_from').style.display = 'inline';
 				}
@@ -50,14 +55,22 @@ function load(frame, place, id){
 			else{
 				if(id == 'from_strand_details'){
 					document.getElementById('warning_from').style.display = 'none';
+					document.getElementsByName('from_strand_id')[0].value = strandID;
 				}
 				if(id == 'to_strand_details'){
 					document.getElementById('warning_to').style.display = 'none';
+					document.getElementsByName('to_strand_id')[0].value = strandID;
 				}
 			}
+
+			//handle sending strand id to server
+			
+
 		}
 		catch(e){
 			// console.log(e);
 		}
 	}
 }
+
+

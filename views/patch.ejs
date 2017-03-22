@@ -4,17 +4,33 @@
 	<title>Patch Fiber</title>
 </head>
 <body>
-	<div>
-		<iframe id='from_strand' src="/strand" height="500px" width="500px"></iframe>
-	</div>
-	<div id='from_strand_details'>Selected from strand is: </div>
-	<p id='warning_from' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
-	<br><br>
-	<div>
-		<iframe id='to_strand' src="/strand" height="500px" width="500px"></iframe>
-	</div>
-	<div id='to_strand_details'>Selected to strand is: </div>
-	<p id='warning_to' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
+	<form method="POST" action="/patch/patchFiber">
+		<div>
+			<iframe id='from_strand' src="/strand" height="500px" width="500px"></iframe>
+		</div>
+		<div id='from_strand_details'>Selected from strand is: </div>
+		<input type="number" name="from_strand_id" hidden>
+		<p id='warning_from' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
+
+		<p>What is the from type? <select name="from_type" required><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
+
+		<br><br>
+
+		<div>
+			<iframe id='to_strand' src="/strand" height="500px" width="500px"></iframe>
+		</div>
+		<div id='to_strand_details'>Selected to strand is: </div>
+		<input type="number" name="to_strand_id" hidden>
+		<p id='warning_to' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
+
+		<p>What is the to type? <select name="to_type" required><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
+
+		<br> <br>
+
+		<p>Does it have a patch cable? <select name="patch_cable" required><option value='' selected disabled>Select</option><option value='Y'>Yes</option><option value='N'>No</option></select></p>
+
+		<button type="submit">Submit</button>
+	</form>
 	<script type="text/javascript" src='/javascripts/patch.js'></script>
 </body>
 </html>

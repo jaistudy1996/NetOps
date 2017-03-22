@@ -13,4 +13,9 @@ router.get('/', function(req, res, next){
 	res.render('patch');
 })
 
+router.post('/patchFiber', function(req, res, next){
+	console.log(req.body);
+	res.redirect('/patch');
+});
+
 module.exports = router;
