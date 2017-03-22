@@ -182,7 +182,7 @@ function addRows(table, tubeId, colors, select, strandId){
 	//Set default value.
 	var option = document.createElement('option');
 	var data = document.createTextNode('NOT SET');
-	// option.disabled = true;
+	option.disabled = true;
 	option.selected = true;
 	option.value = "NOT SET";
 	option.append(data);

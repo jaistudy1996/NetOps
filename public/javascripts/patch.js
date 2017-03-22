@@ -1,5 +1,5 @@
 
-console.log(document.getElementById('from_strand'));
+// console.log(document.getElementById('from_strand'));
 var from_frame = document.getElementById('from_strand');
 var to_frame = document.getElementById('to_strand');
 var from_strand;
@@ -38,11 +38,26 @@ function load(frame, place, id){
 		}
 		try{
 			place = frame.contentWindow.document.querySelector('input[name="selection"]:checked').value;
-			document.getElementById(id).innerHTML = 'Selected from strand has Tube ID = ' + frame.contentWindow.document.getElementsByName('tubeID')[place-1].value + ' Strand ID = ' + frame.contentWindow.document.getElementsByName('strandID')[place-1].value + '.';
-			console.log(frame.contentWindow.document.getElementsByName('strandID')[place-1].value);
+			document.getElementById(id).innerHTML = 'Selected ' + id + ' strand has Tube ID = ' + frame.contentWindow.document.getElementsByName('tubeID')[place-1].value + ' Strand ID = ' + frame.contentWindow.document.getElementsByName('strandID')[place-1].value + '.';
+			if(frame.contentWindow.document.getElementsByName('strandID')[place-1].value == 'NOT SET'){
+				if(id == 'from_strand_details'){
+					document.getElementById('warning_from').style.display = 'inline';
+				}
+				if(id == 'to_strand_details'){
+					document.getElementById('warning_to').style.display = 'inline';
+				}
+			}
+			else{
+				if(id == 'from_strand_details'){
+					document.getElementById('warning_from').style.display = 'none';
+				}
+				if(id == 'to_strand_details'){
+					document.getElementById('warning_to').style.display = 'none';
+				}
+			}
 		}
 		catch(e){
-			console.log(e);
+			// console.log(e);
 		}
 	}
 }

@@ -8,11 +8,13 @@
 		<iframe id='from_strand' src="/strand" height="500px" width="500px"></iframe>
 	</div>
 	<div id='from_strand_details'>Selected from strand is: </div>
+	<p id='warning_from' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
 	<br><br>
 	<div>
 		<iframe id='to_strand' src="/strand" height="500px" width="500px"></iframe>
 	</div>
 	<div id='to_strand_details'>Selected to strand is: </div>
+	<p id='warning_to' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
 	<script type="text/javascript" src='/javascripts/patch.js'></script>
 </body>
 </html>
