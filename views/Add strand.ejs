@@ -27,8 +27,9 @@ table{
 			</fieldset>
 
 			<div id="tubes_info"></div>
+			<h2 id='warning' style="display: none">You can either save or update information at once. Both operations are supported in parallel. </h2><br>
 			<button type="submit" id="save_strand_info" style="display: none">Save strand information</button>
-            <button type="submit" id="strand_update_button" style="display: none">Update strand information</button>
+            <button type="submit" id="strand_update_button" style="display: none" formaction="/strand/updateInfo">Update strand information</button>
 		</form>
 	</div>
 	<script type="text/javascript" src="/javascripts/strand.js"></script>

@@ -182,9 +182,9 @@ function addRows(table, tubeId, colors, select, strandId){
 	//Set default value.
 	var option = document.createElement('option');
 	var data = document.createTextNode('NOT SET');
-	option.disabled = true;
+	// option.disabled = true;
 	option.selected = true;
-	option.value = " ";
+	option.value = "NOT SET";
 	option.append(data);
 	colorSelect.append(option);
 	for(var i=0; i<colors.length; i++){
@@ -228,12 +228,14 @@ function addRows(table, tubeId, colors, select, strandId){
 }
 
 function saveInfo(){
+	document.getElementById('warning').style.display = 'inline';
 	document.getElementById('save_strand_info').style.display = 'inline';
 	document.getElementById('strand_update_button').style.display = 'none';
 
 }
 
 function updateInfo(){
+	document.getElementById('warning').style.display = 'inline';
 	document.getElementById('strand_update_button').style.display = 'inline';
 	document.getElementById('save_strand_info').style.display = 'none';
 }
