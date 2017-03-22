@@ -44,7 +44,7 @@ router.post('/addStrand/', function(req, res, next){
 	var colors = req.body.color;
 	for(var i=0; i<tubes.length; i++){
 		if(strand[i] == 'NOT SET' && colors[i] != 'NOT SET' && tubes[i] != 'NOT SET'){
-			console.log("TRUE::: Tube: ", tubes[i], " Strand: ", strand[i], " Color: ", colors[i]);
+			// console.log("TRUE::: Tube: ", tubes[i], " Strand: ", strand[i], " Color: ", colors[i]);
 			db.query('INSERT INTO strands_fiber (tube_id, strand_color) values(?, ?)', [tubes[i], colors[i]], function(error, results){
 				if(error){
 					console.log(error);
@@ -59,6 +59,20 @@ router.post('/addStrand/', function(req, res, next){
 
 router.post('/updateInfo', function(req, res, next){
 	console.log(req.body);
+	var tubes = req.body.tubeID;
+	var strand = req.body.strandID;
+	var colors = req.body.color;
+	for(var i=0; i<tubes.length; i++){
+		if(strand[i] != 'NOT SET' && colors[i] != 'NOT SET' && tubes[i] != 'NOT SET'){
+			db.query('UPDATE strands_fiber set strand_color = ? where tube_id = ? and strand_id = ?', [colors[i], tubes[i], strand[i]], function(error, result){
+				if(error){
+					console.log(error);
+					res.send('SERVER ERROR');
+				}
+				return;
+			});
+		}
+	}
 	res.redirect('/strand');
 });
 
