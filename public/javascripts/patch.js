@@ -1,5 +1,9 @@
+/**
+ * @author Jayant Arora <jaistudy1996@gmail.com>
+ * @description This file handles all the frame, select and option events for patch.ejs file.
+ */
 
-// console.log(document.getElementById('from_strand'));
+
 var from_frame = document.getElementById('from_strand');
 var to_frame = document.getElementById('to_strand');
 // have seperate frame variables to access them individually.
@@ -20,25 +24,26 @@ to_frame.onload = function() {
  */
 function load(frame, place, id){
 	var body = frame.contentWindow.document.getElementsByTagName('body');
-	var num = 0;
+	
 	body[0].onclick = function(){
+		var num = 0;
 		var selectTags = frame.contentWindow.document.getElementsByTagName("select");
-		var TRtags = frame.contentWindow.document.getElementsByTagName('tr');
+		var trTags = frame.contentWindow.document.getElementsByTagName('tr');
 		for(var i=0; i<selectTags.length; i++){
 			if(selectTags[i].name == 'color'){
-				selectTags[i].onchange = function(){}
+				selectTags[i].onchange = function(){return false;}
 				selectTags[i].disabled = true;
 			}
 		}
-		for(var i=0; i<TRtags.length; i++){
-			if(num < TRtags.length-1 && i != 0){
+		for(var i=0; i<trTags.length; i++){
+			if(num < trTags.length-1 && i != 0 && trTags[i].children.length < 4){
 				var td = document.createElement('td');
 				var radio = document.createElement('input');
 				radio.name = 'selection';
 				radio.type = 'radio';
 				radio.value = i;
 				td.appendChild(radio);
-				TRtags[i].appendChild(td);
+				trTags[i].appendChild(td);
 				num++;
 			}
 		}
@@ -79,8 +84,27 @@ function load(frame, place, id){
 	}
 }
 
+/**
+* @param {string} id - this id refers to the option selected from select.
+* @parma {string} from_or_to - this refers to the from or to location from the page. 
+*/
 function switch_or_FE(id, from_or_to){
-	console.log(id, from_or_to);
+	if(id == 'Switch' && from_or_to == 'from'){
+		document.getElementById('from_switch').style.display = 'inline';
+		document.getElementById('from_fiber_enclosure').style.display = 'none';
+	}
+	if(id == 'FiberEnclosure' && from_or_to == 'from'){
+		document.getElementById('from_switch').style.display = 'none';
+		document.getElementById('from_fiber_enclosure').style.display = 'inline';
+	}
+	if(id == 'Switch' && from_or_to == 'to'){
+		document.getElementById('to_switch').style.display = 'inline';
+		document.getElementById('to_fiber_enclosure').style.display = 'none';
+	}
+	if(id == 'FiberEnclosure' && from_or_to == 'to'){
+		document.getElementById('to_switch').style.display = 'none';
+		document.getElementById('to_fiber_enclosure').style.display = 'inline';
+	}
 }
 
 
