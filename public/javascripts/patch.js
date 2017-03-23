@@ -3,12 +3,14 @@
  * @description This file handles all the frame, select and option events for patch.ejs file.
  */
 
-
+// Get respective frames from DOM by ID.
 var from_frame = document.getElementById('from_strand');
 var to_frame = document.getElementById('to_strand');
-// have seperate frame variables to access them individually.
+
+// These variables will hold the strandID that the user selects to send to the database.
 var from_strand;
 var to_strand;
+
 from_frame.onload = function() {
 	load(from_frame, from_strand, 'from_strand_details');
 }
@@ -26,7 +28,7 @@ function load(frame, place, id){
 	var body = frame.contentWindow.document.getElementsByTagName('body');
 	
 	body[0].onclick = function(){
-		var num = 0;
+		var num = 0; // Count the number of radio buttons in TR tags.
 		var selectTags = frame.contentWindow.document.getElementsByTagName("select");
 		var trTags = frame.contentWindow.document.getElementsByTagName('tr');
 		for(var i=0; i<selectTags.length; i++){
@@ -51,7 +53,7 @@ function load(frame, place, id){
 		try{
 			place = frame.contentWindow.document.querySelector('input[name="selection"]:checked').value;
 
-			// Declare variables to save computation time.
+			// Declare tubeID and strandID variables to save computation time.
 			var tubeID = frame.contentWindow.document.getElementsByName('tubeID')[place-1].value;
 			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place-1].value
 
@@ -84,30 +86,38 @@ function load(frame, place, id){
 			}
 		}
 		catch(e){
+			// Catch all TypeErrors when input for selection is NULL.
 			// console.log(e);
 		}
 	}
 }
 
 /**
-* @param {string} id - this id refers to the option selected from select.
-* @parma {string} from_or_to - this refers to the from or to location from the page. 
-*/
+ * @param {string} id - this id refers to the option selected from select. 
+ * @parma {string} from_or_to - this refers to the from or to location from the page. 
+ * @description This function will disable or enable div tags and submut button to support invalid responses or repeated selection of Switch or FiberEnclosure or vice versa. 
+ */
+
 function switch_or_FE(id, from_or_to){
 	if(id == 'Switch' && from_or_to == 'from'){
+
 		document.getElementById('from_switch').style.display = 'inline';
 		document.getElementById('from_fiber_enclosure').style.display = 'none';
+
 		document.getElementsByName('from_enclosure_number')[0].disabled = true;
 		document.getElementsByName('from_panel_no')[0].disabled = true;
 		document.getElementsByName('from_port_number')[0].disabled = true;
+
 		document.getElementsByName('from_ip_address')[0].disabled = false;
 		document.getElementsByName('from_port_numnber')[0].disabled = false;
 	}
 	if(id == 'FiberEnclosure' && from_or_to == 'from'){
 		document.getElementById('from_switch').style.display = 'none';
 		document.getElementById('from_fiber_enclosure').style.display = 'inline';
+
 		document.getElementsByName('from_ip_address')[0].disabled = true;
 		document.getElementsByName('from_port_numnber')[0].disabled = true;
+
 		document.getElementsByName('from_enclosure_number')[0].disabled = false;
 		document.getElementsByName('from_panel_no')[0].disabled = false;
 		document.getElementsByName('from_port_number')[0].disabled = false;
@@ -115,22 +125,24 @@ function switch_or_FE(id, from_or_to){
 	if(id == 'Switch' && from_or_to == 'to'){
 		document.getElementById('to_switch').style.display = 'inline';
 		document.getElementById('to_fiber_enclosure').style.display = 'none';
+
 		document.getElementsByName('to_enclosure_number')[0].disabled = true;
 		document.getElementsByName('to_panel_no')[0].disabled = true;
 		document.getElementsByName('to_port_number')[0].disabled = true;
+
 		document.getElementsByName('to_ip_address')[0].disabled = false;
 		document.getElementsByName('to_port_numnber')[0].disabled = false;
 	}
 	if(id == 'FiberEnclosure' && from_or_to == 'to'){
 		document.getElementById('to_switch').style.display = 'none';
 		document.getElementById('to_fiber_enclosure').style.display = 'inline';
+
 		document.getElementsByName('to_ip_address')[0].disabled = true;
 		document.getElementsByName('to_port_numnber')[0].disabled = true;
+
 		document.getElementsByName('to_enclosure_number')[0].disabled = false;
 		document.getElementsByName('to_panel_no')[0].disabled = false;
 		document.getElementsByName('to_port_number')[0].disabled = false;
 
 	}
 }
-
-

@@ -66,15 +66,6 @@ router.post('/patchFiber', function(req, res, next){
 			});
 		}
 	});
-	if(req.body.from_type == 'FiberEnclosure'){
-		console.log(req.body.from_enclosure_number);
-		console.log(req.body.from_panel_no);
-		console.log(req.body.from_port_number);
-	}
-	if(req.body.to_type == 'Switch'){
-		console.log(req.body.to_ip_address);
-		console.log(req.body.to_port_numnber);
-	}
 	res.redirect('/patch');
 });
 

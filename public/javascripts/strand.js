@@ -1,5 +1,7 @@
-// Author: Jayant Arora
-// Function to retrieve all tubes with respect to cables from db.
+/**
+ * @author Jayant Arora <jaistudy1996@gmail.com>
+ * @description This script manages all XHR and DOM manipulation for strand.ejs file.
+ */
 
 var cables; // Global variable to store cables from db.
 var colors; // Global varibale to store all colors of fiber.
