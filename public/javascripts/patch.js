@@ -2,6 +2,7 @@
 // console.log(document.getElementById('from_strand'));
 var from_frame = document.getElementById('from_strand');
 var to_frame = document.getElementById('to_strand');
+// have seperate frame variables to access them individually.
 var from_strand;
 var to_strand;
 from_frame.onload = function() {
@@ -12,6 +13,11 @@ to_frame.onload = function() {
 	load(to_frame, to_strand, 'to_strand_details');
 }
 
+/**
+ * @param {frame object} frame - send a frame object to identify specific part of iframe.
+ * @param {number} place - this variable is used to store the returned value of the strand selected.
+ * @param {string} id - this is the id of the place where the data is displayed to the user about the selected strand. 
+ */
 function load(frame, place, id){
 	var body = frame.contentWindow.document.getElementsByTagName('body');
 	var num = 0;
@@ -38,6 +44,8 @@ function load(frame, place, id){
 		}
 		try{
 			place = frame.contentWindow.document.querySelector('input[name="selection"]:checked').value;
+
+			// Declare variables to save computation time.
 			var tubeID = frame.contentWindow.document.getElementsByName('tubeID')[place-1].value;
 			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place-1].value
 
@@ -55,17 +63,15 @@ function load(frame, place, id){
 			else{
 				if(id == 'from_strand_details'){
 					document.getElementById('warning_from').style.display = 'none';
+					// set the valaue to hidden input field to send it with the form. 
 					document.getElementsByName('from_strand_id')[0].value = strandID;
 				}
 				if(id == 'to_strand_details'){
 					document.getElementById('warning_to').style.display = 'none';
+					// set the valaue to hidden input field to send it with the form. 
 					document.getElementsByName('to_strand_id')[0].value = strandID;
 				}
 			}
-
-			//handle sending strand id to server
-			
-
 		}
 		catch(e){
 			// console.log(e);

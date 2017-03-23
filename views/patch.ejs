@@ -14,6 +14,9 @@
 
 		<p>What is the from type? <select name="from_type" required><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
 
+		<div id='from_switch'></div>
+		<div id='from_fiber_enclosure'></div>
+
 		<br><br>
 
 		<div>
@@ -24,6 +27,9 @@
 		<p id='warning_to' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
 
 		<p>What is the to type? <select name="to_type" required><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
+
+		<div id='to_switch'></div>
+		<div id='to_fiber_enclosure'></div>
 
 		<br> <br>
 
