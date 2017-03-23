@@ -36,7 +36,8 @@ function load(frame, place, id){
 			}
 		}
 		for(var i=0; i<trTags.length; i++){
-			if(num < trTags.length-1 && i != 0 && trTags[i].children.length < 4){
+			// Need children.length to stop recurring construction of radio buttons.
+			if(trTags[i].children.length < 4 && num < trTags.length-1 && i != 0){
 				var td = document.createElement('td');
 				var radio = document.createElement('input');
 				radio.name = 'selection';
@@ -60,9 +61,11 @@ function load(frame, place, id){
 			if(strandID == 'NOT SET'){
 				if(id == 'from_strand_details'){
 					document.getElementById('warning_from').style.display = 'inline';
+					// document.getElementById('patch_submit').disabled = true;
 				}
 				if(id == 'to_strand_details'){
 					document.getElementById('warning_to').style.display = 'inline';
+					// document.getElementById('patch_submit').disabled = true;
 				}
 			}
 			else{
@@ -70,11 +73,13 @@ function load(frame, place, id){
 					document.getElementById('warning_from').style.display = 'none';
 					// set the valaue to hidden input field to send it with the form. 
 					document.getElementsByName('from_strand_id')[0].value = strandID;
+					// document.getElementById('patch_submit').disabled = false;
 				}
 				if(id == 'to_strand_details'){
 					document.getElementById('warning_to').style.display = 'none';
 					// set the valaue to hidden input field to send it with the form. 
 					document.getElementsByName('to_strand_id')[0].value = strandID;
+					// document.getElementById('patch_submit').disabled = false;
 				}
 			}
 		}
@@ -92,18 +97,39 @@ function switch_or_FE(id, from_or_to){
 	if(id == 'Switch' && from_or_to == 'from'){
 		document.getElementById('from_switch').style.display = 'inline';
 		document.getElementById('from_fiber_enclosure').style.display = 'none';
+		document.getElementsByName('from_enclosure_number')[0].disabled = true;
+		document.getElementsByName('from_panel_no')[0].disabled = true;
+		document.getElementsByName('from_port_number')[0].disabled = true;
+		document.getElementsByName('from_ip_address')[0].disabled = false;
+		document.getElementsByName('from_port_numnber')[0].disabled = false;
 	}
 	if(id == 'FiberEnclosure' && from_or_to == 'from'){
 		document.getElementById('from_switch').style.display = 'none';
 		document.getElementById('from_fiber_enclosure').style.display = 'inline';
+		document.getElementsByName('from_ip_address')[0].disabled = true;
+		document.getElementsByName('from_port_numnber')[0].disabled = true;
+		document.getElementsByName('from_enclosure_number')[0].disabled = false;
+		document.getElementsByName('from_panel_no')[0].disabled = false;
+		document.getElementsByName('from_port_number')[0].disabled = false;
 	}
 	if(id == 'Switch' && from_or_to == 'to'){
 		document.getElementById('to_switch').style.display = 'inline';
 		document.getElementById('to_fiber_enclosure').style.display = 'none';
+		document.getElementsByName('to_enclosure_number')[0].disabled = true;
+		document.getElementsByName('to_panel_no')[0].disabled = true;
+		document.getElementsByName('to_port_number')[0].disabled = true;
+		document.getElementsByName('to_ip_address')[0].disabled = false;
+		document.getElementsByName('to_port_numnber')[0].disabled = false;
 	}
 	if(id == 'FiberEnclosure' && from_or_to == 'to'){
 		document.getElementById('to_switch').style.display = 'none';
 		document.getElementById('to_fiber_enclosure').style.display = 'inline';
+		document.getElementsByName('to_ip_address')[0].disabled = true;
+		document.getElementsByName('to_port_numnber')[0].disabled = true;
+		document.getElementsByName('to_enclosure_number')[0].disabled = false;
+		document.getElementsByName('to_panel_no')[0].disabled = false;
+		document.getElementsByName('to_port_number')[0].disabled = false;
+
 	}
 }
 
