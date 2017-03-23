@@ -79,4 +79,8 @@ function load(frame, place, id){
 	}
 }
 
+function switch_or_FE(id, from_or_to){
+	console.log(id, from_or_to);
+}
+
 

@@ -12,10 +12,17 @@
 		<input type="number" name="from_strand_id" hidden>
 		<p id='warning_from' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
 
-		<p>What is the from type? <select name="from_type" required><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
+		<p>What is the from type? <select name="from_type" required onchange="switch_or_FE(this.value, 'from')"><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
 
-		<div id='from_switch'></div>
-		<div id='from_fiber_enclosure'></div>
+		<div id='from_switch' style="display: none">
+			<input type="text" name="from_ip_address" maxlength="15" required>
+			<input type="number" name="from_port_numnber" required>
+		</div>
+		<div id='from_fiber_enclosure' style="display: none">
+			<input type="number" name="from_enclosure_number" required>
+			<input type="number" name="from_panel_no" required>
+			<input type="number" name="from_port_number" required>
+		</div>
 
 		<br><br>
 
@@ -26,10 +33,17 @@
 		<input type="number" name="to_strand_id" hidden>
 		<p id='warning_to' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
 
-		<p>What is the to type? <select name="to_type" required><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
+		<p>What is the to type? <select name="to_type" required onchange="switch_or_FE(this.value, 'to')"><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
 
-		<div id='to_switch'></div>
-		<div id='to_fiber_enclosure'></div>
+		<div id='to_switch' style='display: none'>
+			<input type="text" name="to_ip_address" maxlength="15">
+			<input type="number" name="to_port_numnber">
+		</div>
+		<div id='to_fiber_enclosure' style='display: none'>
+			<input type="number" name="to_enclosure_number" required>
+			<input type="number" name="to_panel_no" required>
+			<input type="number" name="to_port_number" required>
+		</div>
 
 		<br> <br>
 
