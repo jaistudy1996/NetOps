@@ -6,11 +6,19 @@
 var cables; // Global variable to store cables from db.
 var colors; // Global varibale to store all colors of fiber.
 
+/**
+ * @function 
+ * @description loads @function getStrandColor() and @function getLoc() for faster performance on the page.
+ */
 window.onload = function (){
 	getStrandColor();
 	getLoc();
 }
 
+/**
+ * @function getLoc
+ * @description Will retrieve all locations available from the server and then call @see {@link updateCablesOnPage} @see updateCablesOnPage for futher processing. 
+ */
 function getLoc(){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/tube/getCables', true);

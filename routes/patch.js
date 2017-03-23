@@ -69,4 +69,13 @@ router.post('/patchFiber', function(req, res, next){
 	res.redirect('/patch');
 });
 
+router.get('/search', function(req, res, next){
+	res.render('search');
+});
+
+router.post('/searchParams', function(req, res, next){
+	console.log(req.body);
+	res.redirect('/patch/search');
+})
+
 module.exports = router;
