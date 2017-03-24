@@ -3,7 +3,9 @@
  * @description This script manages all XHR and DOM manipulation for strand.ejs file.
  */
 
+/** @global */
 var cables; // Global variable to store cables from db.
+/** @global */
 var colors; // Global varibale to store all colors of fiber.
 
 /**
@@ -23,6 +25,9 @@ function getLoc(){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/tube/getCables', true);
 	xhr.responseType = 'json';
+	/**
+	 * @description sent as a callback. Will set @global cables to the retrieved cables which is in a JSON array. @see {@link updateCablesOnPage} @see updateCablesOnPage is called.
+	 */
 	xhr.onreadystatechange = function(){
 		if(this.readyState == 4 && this.status == 200){
 			cables = xhr.response;
@@ -35,6 +40,11 @@ function getLoc(){
 	xhr.send();
 }
 
+/**
+ * @function getStrandColor
+ * @description Will retrieve all strand colors available from the server and then set @global colors variable to returned JSON.
+ * @returns NULL. But sets window.colors to returned JSON Object.
+ */
 function getStrandColor(){
 	var xhr = new XMLHttpRequest();
 	var url = '/strand/strandColor/';
