@@ -47,7 +47,7 @@ router.post('/updateStrandData', function(req, res, next){
 			});
 		}
 	}
-	res.redirect("/tube");
+	res.redirect("/strand");
 });
 
 router.post('/addTube', function(req, res, next){
@@ -73,7 +73,7 @@ router.post('/addTube', function(req, res, next){
 			res.send("Wrong number of tubes received.");
 		}
 	});
-	res.redirect("/tube");
+	res.redirect("/strand");
 });
 
 module.exports = router;

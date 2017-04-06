@@ -6,14 +6,22 @@
 <body>
 	<h2>Search for existing patches</h2>
 	<br><br>
-	<form method="POST" action="/patch/searchParams">
+	<form method="POST" onsubmit="onSubmitForm()"> <!-- action="/patch/searchParams" > -->
 		<select name='search_type'>
 			<option value="cable">Cable</option>
 			<option value="switch_ip">Switch</option>
 			<option value="strand_id">Strand</option>
 		</select>
 		<br><br>
-		<button type="submit">Submit</button>
+
+		<fieldset>
+            <pre><label>Select a <strong>from</strong> location: <select name="from_loc" id="from_loc" required>
+              		    <option value="" selected disabled>Select location</option>
+                    </select></label>               <label>Select a <strong>to</strong> location:<select name="to_loc" id="to_loc" required>
+                		<option value="" disabled selected>Select location</option>
+                	</select></label></pre>
+        </fieldset>
+		<button type="button" onclick="onSubmitForm()">Submit</button>
 	</form>
 	<script type="text/javascript" src='/javascripts/patchSearch.js'></script>
 </body>

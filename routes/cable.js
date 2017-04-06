@@ -42,9 +42,10 @@ router.post('/addCable', function(req, res, next){
 	if(!type2){type2 = null;}
 	var type3 = req.body.cable_type_3;
 	if(!type3){type3 = null;}
-	var enclosure_no = req.body.encl_no;
+	var fromEnclosure_no = req.body.from_encl_no;
+	var toEnclosure_no = req.body.to_encl_no;
 	var num_of_tubes = req.body.no_of_tubes;
-	db.query("INSERT into Cables_fiber (from_location, dest_location, num_of_tubes, enclosure_no, type, type2, type3) values(?, ?, ?, ?, ?, ?, ?)", [from_location, dest_location, num_of_tubes, enclosure_no, type, type2, type3], function(err, result){
+	db.query("INSERT into Cables_fiber (from_location, dest_location, num_of_tubes, from_enclosure_no, to_enclosure_no, type, type2, type3) values(?, ?, ?, ?, ?, ?, ?, ?)", [from_location, dest_location, num_of_tubes, fromEnclosure_no, toEnclosure_no, type, type2, type3], function(err, result){
 			if(err){
 				console.log(err);
 			}

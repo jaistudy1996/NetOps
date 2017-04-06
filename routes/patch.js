@@ -75,7 +75,13 @@ router.get('/search', function(req, res, next){
 
 router.post('/searchParams', function(req, res, next){
 	console.log(req.body);
-	res.redirect('/patch/search');
+	db.query('select * from Cables_fiber as cable inner join Tubes_fiber as tube on (cable.cable_id = tube.cable_id) inner join strands_fiber as strand on (tube.tube_id = strand.tube_id) inner join patch_fiber as patch on (patch.from_strand_id = strand.strand_id) where cable.from_location = ?', [req.body.from_loc], function(error, results){
+		if(error){
+			console.log(error);
+		}
+		res.send(results);
+	});
+	//res.redirect('/patch/search');
 })
 
 module.exports = router;
