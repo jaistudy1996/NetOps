@@ -49,6 +49,7 @@ function load(frame, place, id){
 					if(frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked').length > 2){
 						this.checked = false;
 					}
+					return;
 				}
 				td.appendChild(checkbox);
 				trTags[i].appendChild(td);
@@ -56,12 +57,20 @@ function load(frame, place, id){
 			}
 		}
 		try{
-			place = frame.contentWindow.document.querySelector('input[name="selection"]:checked').value;
+			// Place refers to all the selected checkboxes in the iframe.
+			place = frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked');
 			// Declare tubeID and strandID variables to save computation time.
-			var tubeID = frame.contentWindow.document.getElementsByName('tubeID')[place-1].value;
-			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place-1].value
 
-			document.getElementById(id).innerHTML = 'Selected ' + id + ' strand has Tube ID = ' + tubeID + ' Strand ID = ' + strandID + '.';
+			var tubeID = frame.contentWindow.document.getElementsByName('tubeID')[place[0].value-1].value;
+			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place[0].value-1].value
+
+			document.getElementById(id).innerHTML = 'Selected ' + id + ' strand - 1 has Tube ID = ' + tubeID + ' Strand ID = ' + strandID + '.';
+
+			var tubeID_2 = frame.contentWindow.document.getElementsByName('tubeID')[place[1].value-1].value;
+			var strandID_2 = frame.contentWindow.document.getElementsByName('strandID')[place[1].value-1].value
+
+			document.getElementById(id+'_2').innerHTML = 'Selected ' + id + ' strand - 2 has Tube ID = ' + tubeID_2 + ' Strand ID = ' + strandID_2 + '.';
+
 
 			// Warning handled here
 			if(strandID == 'NOT SET'){
@@ -79,18 +88,21 @@ function load(frame, place, id){
 					document.getElementById('warning_from').style.display = 'none';
 					// set the valaue to hidden input field to send it with the form. 
 					document.getElementsByName('from_strand_id')[0].value = strandID;
+					document.getElementsByName('from_strand_id_2')[0].value = strandID_2;
 					// document.getElementById('patch_submit').disabled = false;
 				}
 				if(id == 'to_strand_details'){
 					document.getElementById('warning_to').style.display = 'none';
 					// set the valaue to hidden input field to send it with the form. 
 					document.getElementsByName('to_strand_id')[0].value = strandID;
+					document.getElementsByName('to_strand_id_2')[0].value = strandID_2;
 					// document.getElementById('patch_submit').disabled = false;
 				}
 			}
 		}
 		catch(e){
 			// Catch all  TypeErrors when input for selection is NULL.
+			// Uncomment for debugging
 			// console.log(e);
 		}
 	}

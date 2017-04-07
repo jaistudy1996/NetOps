@@ -9,7 +9,9 @@
 			<iframe id='from_strand' src="/strand" height="500px" width="500px"></iframe>
 		</div>
 		<div id='from_strand_details'>Selected from strand is: </div>
+		<div id='from_strand_details_2'>Selected from strand is: </div>
 		<input type="number" name="from_strand_id" hidden>
+		<input type="number" name="from_strand_id_2" hidden>
 		<p id='warning_from' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
 
 		<p>What is the from type? <select name="from_type" required onchange="switch_or_FE(this.value, 'from')"><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
@@ -30,7 +32,9 @@
 			<iframe id='to_strand' src="/strand" height="500px" width="500px"></iframe>
 		</div>
 		<div id='to_strand_details'>Selected to strand is: </div>
+		<div id='to_strand_details_2'>Selected to strand is: </div>
 		<input type="number" name="to_strand_id" hidden>
+		<input type="number" name="to_strand_id_2" hidden>
 		<p id='warning_to' style="display: none; background-color: red;">You should not select a strand whose strandID is not yet set. This will halt the patch and might break. Configure strand before patching.</p>
 
 		<p>What is the to type? <select name="to_type" required onchange="switch_or_FE(this.value, 'to')"><option value='' selected disabled required>Select</option><option value='Switch'>Switch</option><option value='FiberEnclosure'>FiberEnclosure</option></select></p>
