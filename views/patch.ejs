@@ -16,12 +16,12 @@
 
 		<div id='from_switch' style="display: none">
 			<label>IP address: </label><input type="text" name="from_ip_address" maxlength="15" required>
-			<label>Port Number: </label><input type="number" name="from_port_numnber" required>
+			<label>Port Number: </label><input type="number" name="from_port_numnber" required min=0>
 		</div>
 		<div id='from_fiber_enclosure' style="display: none">
-			<label>Enclosure Number: </label><input type="number" name="from_enclosure_number" required><br>
-			<label>Panel Number: </label><input type="number" name="from_panel_no" required><br>
-			<label>Port Number: </label><input type="number" name="from_port_number" required><br>
+			<label>Enclosure Number: </label><input type="number" name="from_enclosure_number" required min=0><br>
+			<label>Panel Number: </label><input type="number" name="from_panel_no" required min=0><br>
+			<label>Port Number: </label><input type="number" name="from_port_number" required min=0><br>
 		</div>
 
 		<br><br>
@@ -37,12 +37,12 @@
 
 		<div id='to_switch' style='display: none'>
 			<label>IP address: </label><input type="text" name="to_ip_address" maxlength="15">
-			<label>Port Number: </label><input type="number" name="to_port_numnber">
+			<label>Port Number: </label><input type="number" name="to_port_numnber" min=0>
 		</div>
 		<div id='to_fiber_enclosure' style='display: none'>
-			<label>Enclosure Number: </label><input type="number" name="to_enclosure_number" required><br>
-			<label>Panel Number: </label><input type="number" name="to_panel_no" required><br>
-			<label>Port Number: </label><input type="number" name="to_port_number" required><br>
+			<label>Enclosure Number: </label><input type="number" name="to_enclosure_number" required min=0><br>
+			<label>Panel Number: </label><input type="number" name="to_panel_no" required min=0><br>
+			<label>Port Number: </label><input type="number" name="to_port_number" required min=0><br>
 		</div>
 
 		<br> <br>
