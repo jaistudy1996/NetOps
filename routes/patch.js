@@ -18,11 +18,11 @@ router.post('/patchFiber', function(req, res, next){
 	db.query('INSERT INTO patch_fiber (to_strand_id, from_strand_id, patch_cable, from_type, to_type) values (?, ?, ?, ?, ?)', [req.body.to_strand_id, req.body.from_strand_id, req.body.patch_cable, req.body.from_type, req.body.to_type], function(error, results){
 		if(error){
 			db.rollback(function(){
-				console.log(error);
 			});
+			console.log(error);
 			//throw error;
 		}
-		if(results.insertId){
+		if(results){
 			console.log(results.insertId);
 			// Db insert for from_type as switch
 			if(req.body.from_type == 'Switch'){

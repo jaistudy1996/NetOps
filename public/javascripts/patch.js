@@ -38,21 +38,25 @@ function load(frame, place, id){
 			}
 		}
 		for(var i=0; i<trTags.length; i++){
-			// Need children.length to stop recurring construction of radio buttons.
+			// Need children.length to stop recurring construction of checkbox buttons.
 			if(trTags[i].children.length < 4 && num < trTags.length-1 && i != 0){
 				var td = document.createElement('td');
-				var radio = document.createElement('input');
-				radio.name = 'selection';
-				radio.type = 'radio';
-				radio.value = i;
-				td.appendChild(radio);
+				var checkbox = document.createElement('input');
+				checkbox.name = 'selection';
+				checkbox.type = 'checkbox';
+				checkbox.value = i;
+				checkbox.onchange = function(){
+					if(frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked').length > 2){
+						this.checked = false;
+					}
+				}
+				td.appendChild(checkbox);
 				trTags[i].appendChild(td);
 				num++;
 			}
 		}
 		try{
 			place = frame.contentWindow.document.querySelector('input[name="selection"]:checked').value;
-
 			// Declare tubeID and strandID variables to save computation time.
 			var tubeID = frame.contentWindow.document.getElementsByName('tubeID')[place-1].value;
 			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place-1].value
@@ -86,7 +90,7 @@ function load(frame, place, id){
 			}
 		}
 		catch(e){
-			// Catch all TypeErrors when input for selection is NULL.
+			// Catch all  TypeErrors when input for selection is NULL.
 			// console.log(e);
 		}
 	}
