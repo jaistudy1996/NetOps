@@ -106,9 +106,9 @@ function getStrandData(cableID){
 }
 
 function updateStrandDataOnPage(strands, cableID){
-	console.log(strands);
+	//console.log(strands);
 	var tubesOnPage = document.getElementsByClassName("tube");
-	console.log(tubesOnPage);
+	//console.log(tubesOnPage);
 
 	if(strands.length != 0){
 		for(var i=0; i<tubesOnPage.length; i++){
@@ -129,9 +129,9 @@ function updateStrandDataOnPage(strands, cableID){
 
 				xhr.onreadystatechange = function(){
 					if(this.readyState == 4 && this.status == 200){
-						console.log(st[i].tube_id, xhr.response.length);
+						//console.log(st[i].tube_id, xhr.response.length);
 						var table = makeTable()
-						console.log(colors);  // ===== remove this
+						//console.log(colors);  // ===== remove this
 						for(var j=0; j<st[i].num_of_strands; j++){
 							if(j < xhr.response.length){
 								var str_color = xhr.response[j].strand_color;
