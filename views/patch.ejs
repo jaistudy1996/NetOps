@@ -21,7 +21,19 @@
 			<label>Port Number: </label><input type="number" name="from_port_numnber" required min=0>
 		</div>
 		<div id='from_fiber_enclosure' style="display: none">
-			<label>Enclosure Number: </label><input type="number" name="from_enclosure_number" required min=0><br>
+			<label>Select Enclosure location: <select>
+					<option value="" disabled selected>
+						Select 
+					</option>
+					<option id="from_strand_details_loc_1">
+						
+					</option>
+					<option id="from_strand_details_loc_2">
+						
+					</option>
+				</select>
+			</label><br>
+			<label>Enclosure Number: </label><input type="number" id="from_strand_details_enclosure_no" name="from_enclosure_number" required min=0><br>
 			<label>Panel Number: </label><input type="number" name="from_panel_no" required min=0><br>
 			<label>Port Number: </label><input type="number" name="from_port_number" required min=0><br>
 		</div>
@@ -44,7 +56,19 @@
 			<label>Port Number: </label><input type="number" name="to_port_numnber" min=0>
 		</div>
 		<div id='to_fiber_enclosure' style='display: none'>
-			<label>Enclosure Number: </label><input type="number" name="to_enclosure_number" required min=0><br>
+			<label>Select Enclosure location: <select>
+					<option value="" disabled selected>
+						Select 
+					</option>
+					<option id="to_strand_details_loc_1">
+						
+					</option>
+					<option id="to_strand_details_loc_2">
+						
+					</option>
+				</select>
+			</label><br>
+			<label>Enclosure Number: </label><input type="number" id="to_strand_details_enclosure_no" name="to_enclosure_number" required min=0><br>
 			<label>Panel Number: </label><input type="number" name="to_panel_no" required min=0><br>
 			<label>Port Number: </label><input type="number" name="to_port_number" required min=0><br>
 		</div>

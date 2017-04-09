@@ -51,9 +51,25 @@ function load(frame, place, id){
 					}
 					if(frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked').length == 2){
 						// this cableID will get the cable ID of the selected cable from the list.
+						// the values of these options actually are the cable ID's from the database.
 						var cableID = frame.contentWindow.document.querySelector('#cable_select').value;
-
-						console.log(frame.contentWindow.cables);
+						// subtract 1 because cablesID's start with 1 and we are accessing the db will give us the info for the next one.. 
+						var cableInfo = frame.contentWindow.cables[cableID-1];
+						document.getElementById(id+'_loc_1').innerHTML = cableInfo.from_building;
+						document.getElementById(id+'_loc_1').value = cableInfo.from_location;
+						//Needs to be done only once. 
+						document.getElementById(id+'_loc_1').parentNode.onchange = function(){
+							document.getElementById(id+'_enclosure_no').readOnly = true;
+							if(id[0] == 'f'){
+								document.getElementById(id+'_enclosure_no').value = cableInfo.from_enclosure_no;
+							}
+							else{
+								document.getElementById(id+'_enclosure_no').value = cableInfo.to_enclosure_no;
+							}
+							
+						}
+						document.getElementById(id+'_loc_2').innerHTML = cableInfo.to_dest_building;
+						document.getElementById(id+'_loc_2').value = cableInfo.dest_location;
 					}
 					return;
 				}
