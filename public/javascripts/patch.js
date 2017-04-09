@@ -49,6 +49,12 @@ function load(frame, place, id){
 					if(frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked').length > 2){
 						this.checked = false;
 					}
+					if(frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked').length == 2){
+						// this cableID will get the cable ID of the selected cable from the list.
+						var cableID = frame.contentWindow.document.querySelector('#cable_select').value;
+
+						console.log(frame.contentWindow.cables);
+					}
 					return;
 				}
 				td.appendChild(checkbox);

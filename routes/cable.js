@@ -32,6 +32,16 @@ router.get('/getCableType', function(req, res, next){
 	});
 });
 
+router.get('/getCableByLocation/:id', function(req, res, next){
+	db.query("SELECT * from Cables_fiber WHERE cable_id = ?", [req.params.id], function(error, results){
+		if(error){
+			console.log(error);
+			res.send.status(500);
+		}
+		res.send(results);
+	});
+});
+
 router.post('/addCable', function(req, res, next){
 	// TODO: save this data in the database.
 	console.log(req.body);
