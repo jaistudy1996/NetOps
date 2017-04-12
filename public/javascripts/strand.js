@@ -200,18 +200,20 @@ function addRows(table, tubeId, colors, select, strandId){
 	var colorSelect = document.createElement('select');
 	colorSelect.name = "color";
 	//Set default value.
-	var option = document.createElement('option');
+	var optionFirst = document.createElement('option');
 	var data = document.createTextNode('NOT SET');
-	option.disabled = true;
-	option.selected = true;
-	option.value = "NOT SET";
-	option.append(data);
-	colorSelect.append(option);
+	optionFirst.disabled = false;
+	optionFirst.selected = true;
+	optionFirst.value = "NOT SET";
+	optionFirst.appendChild(data);
+	colorSelect.appendChild(optionFirst);
 	for(var i=0; i<colors.length; i++){
 		var option = document.createElement('option');
 		var data = document.createTextNode(colors[i].color_name);
 		if(colors[i].color_id == select){
 			option.selected = true;
+			// Disable NOT SET when a value is available from the database.
+			optionFirst.disabled = true;
 			colorSelect.onchange = function(){
 				updateInfo();
 			};
