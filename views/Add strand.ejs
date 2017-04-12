@@ -17,7 +17,7 @@ table{
     <p>Add strands to database.</p>
 
 	<div>
-		<form method="post" id="strand_form" action='/strand/addStrand'>
+		<form method="post" id="strand_form">
 			<fieldset>
 				<label>
 					Select a cable: <select id="cable_select" required onchange="updateTubeDataOnPage(this.value)">
@@ -28,7 +28,7 @@ table{
 
 			<div id="tubes_info"></div>
 			<h2 id='warning' style="display: none">You can either save or update information at once. Both operations are supported in parallel. </h2><br>
-			<button type="submit" id="save_strand_info" style="display: none">Save strand information</button>
+			<button type="submit" id="save_strand_info" style="display: none" formaction="/strand/addStrand">Save strand information</button>
             <button type="submit" id="strand_update_button" style="display: none" formaction="/strand/updateInfo">Update strand information</button>
 		</form>
 	</div>
