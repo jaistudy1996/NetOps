@@ -37,14 +37,20 @@ function load(frame, place, id){
 				selectTags[i].disabled = true;
 			}
 		}
+
+		// Use indexVal to set value of checkbox. If you use i as the value then when it skips for loop, it makes some of the checkboxes have no strandID and no tubeID.
+		indexVal = 1
 		for(var i=0; i<trTags.length; i++){
-			// Need children.length to stop recurring construction of checkbox buttons.
-			if(trTags[i].children.length < 4 && num < trTags.length-1 && i != 0){
+			// Need children.length to stop recurring construction of checkbox buttons. i != 0
+			// Do not add checbox if it is a heading.
+
+			if(trTags[i].children.length < 4 && num < trTags.length-1 && trTags[i].children[0].matches('th') == false){
 				var td = document.createElement('td');
 				var checkbox = document.createElement('input');
 				checkbox.name = 'selection';
 				checkbox.type = 'checkbox';
-				checkbox.value = i;
+				checkbox.value = indexVal;
+				indexVal++;
 				checkbox.onchange = function(){
 					if(frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked').length > 2){
 						this.checked = false;
@@ -52,7 +58,8 @@ function load(frame, place, id){
 					if(frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked').length == 2){
 						// this cableID will get the cable ID of the selected cable from the list.
 						// the values of these options actually are the cable ID's from the database.
-						var cableID = frame.contentWindow.document.querySelector('#cable_select').value;
+						// UPDATE: change to selectedIndex as the value attr can change overtime for cables
+						var cableID = frame.contentWindow.document.querySelector('#cable_select').selectedIndex;
 						// subtract 1 because cablesID's start with 1 and we are accessing the db will give us the info for the next one.. 
 						var cableInfo = frame.contentWindow.cables[cableID-1];
 						document.getElementById(id+'_loc_1').innerHTML = cableInfo.from_building;
@@ -82,14 +89,17 @@ function load(frame, place, id){
 			// Place refers to all the selected checkboxes in the iframe.
 			place = frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked');
 			// Declare tubeID and strandID variables to save computation time.
-
+			console.log("Place: ", place);
 			var tubeID = frame.contentWindow.document.getElementsByName('tubeID')[place[0].value-1].value;
-			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place[0].value-1].value
-
+			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place[0].value-1].value;
+			console.log("TubeID - 1: ", tubeID);
+			console.log("StrandID - 1: ", strandID);
 			document.getElementById(id).innerHTML = 'Selected ' + id + ' strand - 1 has Tube ID = ' + tubeID + ' Strand ID = ' + strandID + '.';
 
 			var tubeID_2 = frame.contentWindow.document.getElementsByName('tubeID')[place[1].value-1].value;
-			var strandID_2 = frame.contentWindow.document.getElementsByName('strandID')[place[1].value-1].value
+			var strandID_2 = frame.contentWindow.document.getElementsByName('strandID')[place[1].value-1].value;
+			console.log("TubeID - 2: ", tubeID_2);
+			console.log("StrandID - 2: ", strandID_2);
 
 			document.getElementById(id+'_2').innerHTML = 'Selected ' + id + ' strand - 2 has Tube ID = ' + tubeID_2 + ' Strand ID = ' + strandID_2 + '.';
 
@@ -125,7 +135,7 @@ function load(frame, place, id){
 		catch(e){
 			// Catch all  TypeErrors when input for selection is NULL.
 			// Uncomment for debugging
-			// console.log(e);
+			console.log(e);
 		}
 	}
 }
