@@ -89,17 +89,12 @@ function load(frame, place, id){
 			// Place refers to all the selected checkboxes in the iframe.
 			place = frame.contentWindow.document.querySelectorAll('input[name="selection"]:checked');
 			// Declare tubeID and strandID variables to save computation time.
-			console.log("Place: ", place);
 			var tubeID = frame.contentWindow.document.getElementsByName('tubeID')[place[0].value-1].value;
 			var strandID = frame.contentWindow.document.getElementsByName('strandID')[place[0].value-1].value;
-			console.log("TubeID - 1: ", tubeID);
-			console.log("StrandID - 1: ", strandID);
 			document.getElementById(id).innerHTML = 'Selected ' + id + ' strand - 1 has Tube ID = ' + tubeID + ' Strand ID = ' + strandID + '.';
 
 			var tubeID_2 = frame.contentWindow.document.getElementsByName('tubeID')[place[1].value-1].value;
 			var strandID_2 = frame.contentWindow.document.getElementsByName('strandID')[place[1].value-1].value;
-			console.log("TubeID - 2: ", tubeID_2);
-			console.log("StrandID - 2: ", strandID_2);
 
 			document.getElementById(id+'_2').innerHTML = 'Selected ' + id + ' strand - 2 has Tube ID = ' + tubeID_2 + ' Strand ID = ' + strandID_2 + '.';
 
@@ -135,7 +130,7 @@ function load(frame, place, id){
 		catch(e){
 			// Catch all  TypeErrors when input for selection is NULL.
 			// Uncomment for debugging
-			console.log(e);
+			// console.log(e);
 		}
 	}
 }
