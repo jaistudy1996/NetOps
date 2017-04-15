@@ -15,7 +15,7 @@ router.get('/', function(req, res, next){
 
 router.post('/patchFiber', function(req, res, next){
 	console.log(req.body);
-	db.query('INSERT INTO patch_fiber (to_strand_id, from_strand_id, patch_cable, from_type, to_type) values (?, ?, ?, ?, ?)', [req.body.to_strand_id, req.body.from_strand_id, req.body.patch_cable, req.body.from_type, req.body.to_type], function(error, results){
+	db.query('INSERT INTO patch_fiber (to_strand_id, from_strand_id, patch_cable, from_type, to_type, from_strand_id_2, to_strand_id_2) values (?, ?, ?, ?, ?, ?, ?)', [req.body.to_strand_id, req.body.from_strand_id, req.body.patch_cable, req.body.from_type, req.body.to_type, req.body.from_strand_id_2, req.body.to_strand_id_2], function(error, results){
 		if(error){
 			db.rollback(function(){
 			});
@@ -46,7 +46,7 @@ router.post('/patchFiber', function(req, res, next){
 				});
 			}
 			if(req.body.from_type == 'FiberEnclosure'){
-				db.query('INSERT INTO patch_FE_fiber (patch_id, enclosure_no, panel_no, port_no) values (?, ?, ?, ?)', [results.insertId, req.body.from_enclosure_number, req.body.from_panel_no, req.body.from_port_number], function(error, results){
+				db.query('INSERT INTO patch_FE_fiber (patch_id, enclosure_no, panel_no, port_no, location_id, loc_type) values (?, ?, ?, ?, ?, ?)', [results.insertId, req.body.from_enclosure_number, req.body.from_panel_no, req.body.from_port_number, req.body.from_enclosure_location_number, "from"], function(error, results){
 					if(error){
 						db.rollback(function(){
 							console.log(error);
@@ -56,7 +56,7 @@ router.post('/patchFiber', function(req, res, next){
 				});
 			}
 			if(req.body.to_type == 'FiberEnclosure'){
-				db.query('INSERT INTO patch_FE_fiber (patch_id, enclosure_no, panel_no, port_no) values(?, ?, ?, ?)', [results.insertId, req.body.to_enclosure_number, req.body.to_panel_no, req.body.to_port_number], function(error, results){
+				db.query('INSERT INTO patch_FE_fiber (patch_id, enclosure_no, panel_no, port_no, location_id, loc_type) values(?, ?, ?, ?, ?, ?)', [results.insertId, req.body.to_enclosure_number, req.body.to_panel_no, req.body.to_port_number, req.body.to_enclosure_location_number, "to"], function(error, results){
 					if(error){
 						db.rollback(function(){
 							console.log(error);
